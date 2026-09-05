@@ -4,7 +4,6 @@ import { Hero } from './components/Hero'
 import { Introduction } from './components/Introduction'
 import { About } from './components/About'
 import { PublicService } from './components/PublicService'
-import { Timeline } from './components/Timeline'
 import { LegislativeRecord } from './components/LegislativeRecord'
 import { CommitteeExperience } from './components/CommitteeExperience'
 import { ElectionStats } from './components/ElectionStats'
@@ -14,7 +13,6 @@ import { MediaGallery } from './components/MediaGallery'
 import { Connect } from './components/Connect'
 import { Footer } from './components/Footer'
 import { WaveDivider } from './components/Motifs'
-import { DemoCorner } from './components/DemoBadge'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -29,7 +27,6 @@ export default function App() {
       </a>
 
       <Navbar menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((v) => !v)} />
-      <DemoCorner />
 
       <main>
         <Hero />
@@ -37,7 +34,6 @@ export default function App() {
         <WaveDivider className="bg-white py-2" />
         <About />
         <PublicService />
-        <Timeline />
         <LegislativeRecord />
         <CommitteeExperience />
         <ElectionStats />

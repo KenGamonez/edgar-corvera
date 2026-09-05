@@ -1,6 +1,6 @@
 import { Logo } from './Logo'
 import { WaveMotif, StarMotif } from './Motifs'
-import { brand, disclaimers, navLinks } from '../data/content'
+import { brand, navLinks } from '../data/content'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -61,10 +61,6 @@ export function Footer() {
               </nav>
 
               <div className="space-y-3">
-                <p className="micro-label flex items-center gap-2 text-gold lg:justify-end">
-                  <StarMotif className="h-3 w-3" animated={false} />
-                  {disclaimers.demo}
-                </p>
                 <p className="text-sm text-white/35">
                   {brand.election}
                   <span className="mx-2 text-white/20">·</span>
@@ -76,7 +72,7 @@ export function Footer() {
 
           <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs text-white/30">
-              © {year} Edgar Corvera Campaign Concept. Presentation website.
+              © {year} Edgar Corvera Campaign
             </p>
             <p className="text-xs text-white/25">
               Surigao del Sur, Philippines

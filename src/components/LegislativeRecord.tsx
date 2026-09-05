@@ -1,6 +1,6 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { disclaimers, legislativeRecords } from '../data/content'
+import { legislativeRecords } from '../data/content'
 
 export function LegislativeRecord() {
   return (
@@ -16,11 +16,8 @@ export function LegislativeRecord() {
               <SectionHeading
                 eyebrow="Record"
                 title={<span id="legislative-heading">LEGISLATIVE RECORD</span>}
-                description="Selected measures associated with Edgar's city council service — presented for this concept site."
+                description="Selected measures associated with Edgar's city council service."
               />
-              <p className="mt-8 max-w-sm text-xs leading-relaxed text-charcoal/45">
-                {disclaimers.legislative}
-              </p>
             </Reveal>
 
             <div className="lg:col-span-8">

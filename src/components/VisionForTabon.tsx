@@ -38,9 +38,7 @@ export function VisionForTabon() {
             <div className="mt-8 max-w-lg">
               <WaveMotif className="w-full" />
               <p className="mt-6 text-base leading-relaxed text-white/55 sm:text-lg">
-                Future platform areas for Barangay Tabon — structured for verified campaign content.
-                No promises are stated here; these are editorial placeholders awaiting official
-                priorities.
+                Community priorities and areas of focus for Barangay Tabon — structured for discussion and development.
               </p>
             </div>
           </Reveal>
@@ -49,31 +47,27 @@ export function VisionForTabon() {
             {visionAreas.map((area, i) => (
               <Reveal key={area.number} delay={i * 0.04}>
                 <li>
-                  <button
-                    type="button"
-                    className="group flex w-full flex-col gap-3 border-b border-white/10 py-7 text-left transition-colors duration-300 hover:bg-white/[0.03] sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-9"
-                  >
+                  <div className="group flex w-full flex-col gap-3 border-b border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-9">
                     <div className="flex items-baseline gap-5 sm:gap-8">
                       <span className="font-display text-sm text-gold/70 tabular-nums transition-all duration-300 group-hover:text-gold group-hover:tracking-widest">
                         {area.number}
                       </span>
-                      <span className="font-display text-2xl font-semibold tracking-tight transition-transform duration-400 group-hover:translate-x-2 sm:text-3xl md:text-4xl">
-                        {area.title}
-                        {area.subtitle && (
-                          <>
-                            <br className="sm:hidden" />
-                            <span className="text-white/50"> {area.subtitle}</span>
-                          </>
-                        )}
-                      </span>
+                      <div>
+                        <span className="font-display text-2xl font-semibold tracking-tight transition-transform duration-400 group-hover:translate-x-2 sm:text-3xl md:text-4xl">
+                          {area.title}
+                          {area.subtitle && (
+                            <>
+                              <br className="sm:hidden" />
+                              <span className="text-white/50"> {area.subtitle}</span>
+                            </>
+                          )}
+                        </span>
+                        <p className="mt-2 text-sm leading-relaxed text-white/40 sm:text-base">
+                          {area.description}
+                        </p>
+                      </div>
                     </div>
-                    <span className="ml-12 flex items-center gap-3 sm:ml-0">
-                      <span className="h-px w-0 bg-red transition-all duration-500 group-hover:w-16" />
-                      <span className="micro-label text-white/30 transition-colors group-hover:text-white/70">
-                        Content forthcoming
-                      </span>
-                    </span>
-                  </button>
+                  </div>
                 </li>
               </Reveal>
             ))}

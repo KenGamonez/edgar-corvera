@@ -2,7 +2,6 @@ import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion
 import { useRef } from 'react'
 import { Logo } from './Logo'
 import { Button } from './Button'
-import { DemoBadge } from './DemoBadge'
 import { ImagePlaceholder } from './ImagePlaceholder'
 import { AccentCluster, WaveMotif, StarMotif } from './Motifs'
 import { brand } from '../data/content'
@@ -45,16 +44,6 @@ export function Hero() {
             >
               <p className="micro-label text-blue">{brand.location}</p>
               <span className="hidden h-px w-10 bg-charcoal/15 sm:block" aria-hidden="true" />
-              <DemoBadge />
-            </motion.div>
-
-            <motion.div
-              initial={reduce ? false : { opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.06 }}
-              className="mb-5 sm:mb-7"
-            >
-              <Logo size="lg" variant="frame" />
             </motion.div>
 
             <motion.h1
@@ -159,27 +148,25 @@ export function Hero() {
 
             <motion.div style={{ y: portraitY }} className="relative">
               <ImagePlaceholder
-                label="Edgar Corvera Portrait"
-                sublabel="Replace with official campaign portrait"
+                label="Edgar Corvera"
                 aspect="hero"
                 tone="soft"
-                replaceHint="/images/edgar-portrait.jpg"
                 className="shadow-[var(--shadow-soft)]"
               />
               {/* Overlap caption strip on desktop */}
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-transparent p-5 pt-16 sm:p-6 sm:pt-20 lg:hidden">
-                <p className="micro-label text-gold/90">Known as</p>
+                <p className="micro-label text-gold/90">Candidate</p>
                 <p className="mt-1 font-display text-lg font-medium text-white">
-                  Edgar &ldquo;Sito&rdquo; Corvera
+                  Edgar Corvera
                 </p>
               </div>
             </motion.div>
 
             <div className="mt-5 hidden items-center justify-between gap-4 border-t border-charcoal/10 pt-5 lg:flex">
               <div>
-                <p className="micro-label text-charcoal/40">Known as</p>
+                <p className="micro-label text-charcoal/40">Candidate</p>
                 <p className="mt-1.5 font-display text-xl font-medium tracking-tight">
-                  Edgar &ldquo;Sito&rdquo; Corvera
+                  Edgar Corvera
                 </p>
               </div>
               <p className="text-right text-xs leading-relaxed text-charcoal/40">
@@ -194,9 +181,9 @@ export function Hero() {
 
       <div className="section-pad">
         <div className="container-site flex items-center gap-4 border-t border-charcoal/[0.08] py-4">
-          <span className="micro-label text-charcoal/25">Campaign Concept</span>
-          <span className="h-px flex-1 bg-charcoal/[0.08]" aria-hidden="true" />
           <span className="micro-label text-charcoal/25">Tabon · Bislig</span>
+          <span className="h-px flex-1 bg-charcoal/[0.08]" aria-hidden="true" />
+          <span className="micro-label text-charcoal/25">2026</span>
         </div>
       </div>
     </section>

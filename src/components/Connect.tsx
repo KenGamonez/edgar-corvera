@@ -1,7 +1,6 @@
 import { Reveal } from './Reveal'
 import { Button } from './Button'
 import { WaveMotif, AccentCluster } from './Motifs'
-import { DemoBadge } from './DemoBadge'
 
 export function Connect() {
   return (
@@ -23,9 +22,6 @@ export function Connect() {
         <div className="container-site">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <div className="mb-6 flex justify-center">
-                <DemoBadge />
-              </div>
               <p className="micro-label text-blue mb-5">Connect</p>
               <h2
                 id="connect-heading"

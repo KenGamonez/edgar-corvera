@@ -1,14 +1,14 @@
 export const brand = {
   name: 'Edgar Corvera',
-  fullName: 'Edgar Balaan Corvera',
-  knownAs: 'Edgar "Sito" Corvera',
+  fullName: 'Edgar Corvera',
+  knownAs: 'Edgar Corvera',
   title: 'Candidate for Barangay Captain',
   location: 'Barangay Tabon · Bislig City',
   locationShort: 'Barangay Tabon',
   city: 'Bislig City',
   province: 'Surigao del Sur, Philippines',
   election: '2026 Barangay & SK Elections',
-  tagline: 'Engineering. Public Service. Experience.',
+  tagline: 'Electrical Engineer · Public Service · Experience',
 } as const
 
 export const navLinks = [
@@ -21,32 +21,27 @@ export const navLinks = [
 
 export const about = {
   education: 'University of San Jose–Recoletos, Cebu',
-  profession: 'Engineering / civil engineering background',
+  profession: 'Electrical Engineer',
   previousRole: 'Former project manager at Philsaga Mining',
   publicService: 'Multiple terms as Bislig City councilor',
   intro:
-    'An engineer and former project manager with years of experience in Bislig City public service — bringing technical discipline and community focus to Barangay Tabon.',
+    'An electrical engineer and former project manager with years of experience in Bislig City public service — bringing technical discipline and community focus to Barangay Tabon.',
 } as const
 
-export const serviceHighlights = [
-  { label: 'Multiple Terms', detail: 'City Councilor' },
-  { label: 'Engineering', detail: 'Background' },
-  { label: 'Public Works', detail: '& Infrastructure' },
-  { label: 'Renewable Energy', detail: '& Waterworks' },
-] as const
+
 
 export const timeline = [
   {
     id: 'engineering',
-    title: 'Engineering Background',
-    subtitle: 'Civil engineering foundation',
-    detail: 'Technical training and professional practice rooted in engineering discipline.',
+    title: 'Engineering',
+    subtitle: 'Technical Foundation',
+    detail: 'Electrical engineering background with technical training and professional practice.',
   },
   {
     id: 'philsaga',
     title: 'Project Management',
     subtitle: 'Philsaga Mining',
-    detail: 'Former project manager — delivering complex works with accountability and precision.',
+    detail: 'Former project manager delivering complex works with accountability and precision.',
   },
   {
     id: 'public-service',
@@ -56,21 +51,9 @@ export const timeline = [
   },
   {
     id: 'councilor',
-    title: 'Multiple Terms',
-    subtitle: 'City Councilor',
+    title: 'City Council',
+    subtitle: 'Multiple Terms',
     detail: 'Served multiple terms as Bislig City councilor, focused on works and development.',
-  },
-  {
-    id: '2022',
-    title: '2022',
-    subtitle: 'City Council Election',
-    detail: 'Placed 2nd with approximately 22,845 votes — won a seat.',
-  },
-  {
-    id: '2025',
-    title: '2025',
-    subtitle: 'City Council Election',
-    detail: 'Received 22,114 votes (30.56%), placing 11th — did not win a seat.',
   },
   {
     id: '2026',
@@ -148,41 +131,53 @@ export const elections = [
 ] as const
 
 export const visionAreas = [
-  { number: '01', title: 'Infrastructure', subtitle: null },
-  { number: '02', title: 'Environment', subtitle: '& Sustainability' },
-  { number: '03', title: 'Health', subtitle: '& Community Welfare' },
-  { number: '04', title: 'Youth', subtitle: '& Sports' },
-  { number: '05', title: 'Livelihood', subtitle: '& Local Development' },
-  { number: '06', title: 'Peace, Safety', subtitle: '& Disaster Preparedness' },
+  { 
+    number: '01', 
+    title: 'Infrastructure', 
+    subtitle: null,
+    description: 'Reliable roads, drainage, public spaces, facilities and the infrastructure that supports everyday community life.'
+  },
+  { 
+    number: '02', 
+    title: 'Environment', 
+    subtitle: '& Sustainability',
+    description: 'Environmental stewardship, sustainability initiatives, and preservation of Tabon\'s natural resources.'
+  },
+  { 
+    number: '03', 
+    title: 'Health', 
+    subtitle: '& Community Welfare',
+    description: 'Community health services, wellness programs, and initiatives that support the well-being of residents.'
+  },
+  { 
+    number: '04', 
+    title: 'Youth', 
+    subtitle: '& Sports',
+    description: 'Youth development programs, sports activities, and opportunities for young residents in Tabon.'
+  },
+  { 
+    number: '05', 
+    title: 'Livelihood', 
+    subtitle: '& Local Development',
+    description: 'Economic opportunities, livelihood programs, and local development initiatives for the community.'
+  },
+  { 
+    number: '06', 
+    title: 'Peace, Safety', 
+    subtitle: '& Disaster Preparedness',
+    description: 'Community safety, peace and order, and disaster preparedness for the welfare of all residents.'
+  },
 ] as const
 
 export const updates = [
   {
-    id: 'demo-1',
-    tag: 'DEMO UPDATE',
+    id: 'update-1',
+    tag: 'COMING SOON',
     category: 'Community',
-    title: 'Community priorities and the future of Tabon',
+    title: 'Campaign updates forthcoming',
     excerpt:
-      'A placeholder editorial on listening first — mapping what residents value most for barangay-level leadership.',
-    date: 'Concept · 2026',
-  },
-  {
-    id: 'demo-2',
-    tag: 'DEMO UPDATE',
-    category: 'Engagement',
-    title: 'Listening to the community',
-    excerpt:
-      'Demonstration content for how campaign updates might surface conversations, concerns, and local priorities.',
-    date: 'Concept · 2026',
-  },
-  {
-    id: 'demo-3',
-    tag: 'DEMO UPDATE',
-    category: 'Presence',
-    title: 'Building a stronger local connection',
-    excerpt:
-      'Sample story framing for presence on the ground — designed to be replaced with verified campaign activity.',
-    date: 'Concept · 2026',
+      'Verified campaign activities and community updates will be published here.',
+    date: '2026',
   },
 ] as const
 
@@ -230,5 +225,4 @@ export const disclaimers = {
     'Selected records shown for presentation purposes and subject to verification before publication.',
   elections:
     'Election figures shown are based on supplied research and should be verified before official publication.',
-  demo: 'DEMO / CONCEPT WEBSITE',
 } as const

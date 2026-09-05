@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useInView, useReducedMotion } from 'framer-motion'
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { disclaimers, elections } from '../data/content'
+import { elections } from '../data/content'
 
 function AnimatedStat({
   value,
@@ -44,7 +44,7 @@ export function ElectionStats() {
             <SectionHeading
               eyebrow="Electoral Record"
               title={<span id="elections-heading">ELECTION EXPERIENCE</span>}
-              description="City council election results presented factually from supplied research."
+              description="City council election results presented factually."
             />
           </Reveal>
 
@@ -96,12 +96,6 @@ export function ElectionStats() {
               </Reveal>
             ))}
           </div>
-
-          <Reveal delay={0.15}>
-            <p className="mt-10 max-w-2xl text-xs leading-relaxed text-charcoal/45">
-              {disclaimers.elections}
-            </p>
-          </Reveal>
         </div>
       </div>
     </section>

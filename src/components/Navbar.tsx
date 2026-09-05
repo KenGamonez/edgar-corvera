@@ -1,7 +1,6 @@
 import { useEffect } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Logo } from './Logo'
-import { DemoBadge } from './DemoBadge'
 import { navLinks } from '../data/content'
 import { useActiveSection, useScrolled } from '../hooks/useUi'
 
@@ -65,7 +64,6 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
             </nav>
 
             <div className="flex items-center gap-3 sm:gap-4">
-              <DemoBadge className="hidden lg:inline-flex" />
               <a
                 href="#connect"
                 className={`hidden items-center px-4 py-2.5 text-[0.62rem] font-semibold tracking-[0.18em] uppercase transition-all duration-300 sm:inline-flex ${
@@ -133,7 +131,6 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
             >
               <div className="mb-8 flex items-end justify-between border-b border-white/10 pb-6">
                 <Logo size="md" variant="dark" />
-                <DemoBadge />
               </div>
 
               <ul className="flex flex-1 flex-col justify-center gap-0">

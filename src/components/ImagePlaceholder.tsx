@@ -15,23 +15,21 @@ type ImagePlaceholderProps = {
   sublabel?: string
   aspect?: Aspect
   className?: string
-  replaceHint?: string
   tone?: 'soft' | 'charcoal' | 'blue'
-  /** Drop in a real image path later — e.g. "/images/edgar-portrait.jpg" */
+  /** Drop in a real image path later — e.g. "/images/your-file.jpg" */
   src?: string
   alt?: string
 }
 
 /**
- * Replaceable image slot.
- * To swap: pass `src="/images/your-file.jpg"` or place file at the replaceHint path.
+ * Editorial image placeholder component.
+ * Pass `src="/images/your-file.jpg"` to display a real image.
  */
 export function ImagePlaceholder({
   label,
-  sublabel = 'Image placeholder · replace with verified photography',
+  sublabel,
   aspect = 'editorial',
   className = '',
-  replaceHint = 'src/assets/…',
   tone = 'soft',
   src,
   alt,
@@ -86,16 +84,14 @@ export function ImagePlaceholder({
         aria-hidden="true"
       />
       <figcaption className="absolute inset-0 flex flex-col items-start justify-end p-5 sm:p-7">
-        <span className="micro-label mb-2 text-gold">Portrait / Photo Slot</span>
         <span
           className={`font-display text-lg font-semibold tracking-tight sm:text-xl ${tones.title}`}
         >
           {label}
         </span>
-        <span className={`mt-1 max-w-xs text-sm leading-relaxed ${tones.body}`}>{sublabel}</span>
-        <span className={`mt-3 font-mono text-[10px] tracking-wider opacity-70 ${tones.body}`}>
-          {replaceHint}
-        </span>
+        {sublabel && (
+          <span className={`mt-1 max-w-xs text-sm leading-relaxed ${tones.body}`}>{sublabel}</span>
+        )}
       </figcaption>
       <span
         className="absolute right-4 top-4 h-8 w-8 border-r border-t border-gold/60"

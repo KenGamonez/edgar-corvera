@@ -1,6 +1,6 @@
 import { Reveal } from './Reveal'
 import { WaveMotif } from './Motifs'
-import { serviceHighlights } from '../data/content'
+import { timeline } from '../data/content'
 
 export function PublicService() {
   return (
@@ -37,16 +37,15 @@ export function PublicService() {
           <Reveal delay={0.1} className="mt-10 max-w-md">
             <WaveMotif className="w-full opacity-90" />
             <p className="mt-8 text-base leading-relaxed text-white/60 sm:text-lg">
-              Built on engineering discipline, project leadership, and multiple terms representing
-              Bislig City — with focus areas in public works, infrastructure, renewable energy, and
-              waterworks.
+              From engineering discipline to project leadership, from industry to elective public service —
+              a path of experience that leads to Barangay Tabon.
             </p>
           </Reveal>
 
           <div className="mt-16 grid gap-0 border-t border-white/10 sm:mt-20 md:grid-cols-2 lg:grid-cols-4">
-            {serviceHighlights.map((item, i) => (
+            {timeline.slice(0, 4).map((item, i) => (
               <Reveal
-                key={item.label}
+                key={item.id}
                 delay={0.08 + i * 0.06}
                 className="group border-b border-white/10 py-10 md:border-b-0 md:border-r md:px-6 md:py-12 md:last:border-r-0 lg:px-8"
               >
@@ -54,9 +53,9 @@ export function PublicService() {
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="mt-6 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
-                  {item.label}
+                  {item.title}
                 </h3>
-                <p className="mt-2 text-lg text-white/50">{item.detail}</p>
+                <p className="mt-2 text-lg text-white/50">{item.subtitle}</p>
                 <div className="mt-8 h-px w-12 origin-left scale-x-100 bg-red transition-transform duration-500 group-hover:scale-x-150" />
               </Reveal>
             ))}
