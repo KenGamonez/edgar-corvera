@@ -1,6 +1,7 @@
 ﻿type LogoProps = {
   className?: string
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'hero'
+  variant?: 'raw' | 'tile'
   alt?: string
 }
 
@@ -14,10 +15,18 @@ const sizes = {
 
 /**
  * Campaign brand mark. Source asset: /logo.png (transparent PNG, multicolor).
- * Proportions are fixed by the intrinsic ratio — the logo is never stretched.
+ * - 'raw': the transparent multicolor PNG, for light surfaces.
+ * - 'tile': the logo placed on a white chip with a thin border — for use over
+ *   dark surfaces where the dark elements of the multicolor logo would otherwise
+ *   be illegible.
  */
-export function Logo({ className = '', size = 'md', alt = 'Edgar Corvera campaign logo' }: LogoProps) {
-  return (
+export function Logo({
+  className = '',
+  size = 'md',
+  variant = 'raw',
+  alt = 'Edgar Corvera campaign logo',
+}: LogoProps) {
+  const img = (
     <img
       src="/logo.png"
       alt={alt}
@@ -25,7 +34,19 @@ export function Logo({ className = '', size = 'md', alt = 'Edgar Corvera campaig
       height={480}
       decoding="async"
       draggable={false}
-      className={`${sizes[size]} object-contain ${className}`}
+      className={`${sizes[size]} object-contain ${variant === 'tile' ? '' : className}`}
     />
   )
+
+  if (variant === 'tile') {
+    return (
+      <span
+        className={`inline-flex items-center justify-center border border-line bg-white p-3 sm:p-4 ${className}`}
+      >
+        {img}
+      </span>
+    )
+  }
+
+  return img
 }

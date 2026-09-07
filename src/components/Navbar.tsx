@@ -12,7 +12,7 @@ type NavbarProps = {
 const SECTION_IDS = ['about', 'public-service', 'for-tabon', 'updates', 'media', 'connect'] as const
 
 export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
-  const scrolled = useScrolled(12)
+  const scrolled = useScrolled(14)
   const reduced = useReducedMotion()
   const active = useActiveSection(SECTION_IDS)
   const toggleRef = useRef<HTMLButtonElement>(null)
@@ -44,8 +44,8 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
     <header
       className={`fixed inset-x-0 top-0 z-[60] border-b transition-[background-color,border-color,box-shadow] duration-300 ${
         solid
-          ? 'border-line bg-white shadow-[0_1px_0_rgba(22,24,28,0.04),0_12px_32px_rgba(22,24,28,0.05)]'
-          : 'border-transparent bg-white lg:border-transparent lg:bg-transparent'
+          ? 'border-line bg-white shadow-[0_1px_0_rgba(22,24,28,0.05),0_12px_32px_rgba(22,24,28,0.06)]'
+          : 'border-transparent bg-transparent'
       }`}
     >
       <div className="section-pad">
@@ -56,10 +56,14 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
             aria-label="Edgar Corvera — home"
             className="flex min-w-0 flex-1 items-center lg:flex-none"
           >
-            <Logo size="sm" className="h-12 w-auto lg:h-14" />
+            <Logo
+              size="sm"
+              variant={solid ? 'raw' : 'tile'}
+              className="h-12 w-auto lg:h-14"
+            />
           </a>
 
-          {/* Desktop navigation */}
+          {/* Desktop navigation — text toggles charcoal (solid) / white (over dark hero). */}
           <nav
             aria-label="Primary"
             className="hidden items-center gap-8 lg:ml-auto lg:flex"
@@ -69,7 +73,11 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
                 key={link.id}
                 href={link.href}
                 className={`nav-link micro-label transition-colors duration-300 ${
-                  active === link.id ? 'text-red' : 'text-charcoal/70 hover:text-charcoal'
+                  active === link.id
+                    ? 'text-red'
+                    : solid
+                      ? 'text-charcoal/70 hover:text-charcoal'
+                      : 'text-white/75 hover:text-white'
                 }`}
                 data-active={active === link.id ? 'true' : 'false'}
                 aria-current={active === link.id ? 'true' : undefined}
@@ -83,7 +91,9 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
           <div className="flex shrink-0 items-center gap-3">
             <a
               href="#connect"
-              className="micro-label hidden items-center bg-red px-5 py-3 text-white transition-colors hover:bg-red-deep md:inline-flex"
+              className={`micro-label hidden items-center px-5 py-3 transition-colors duration-300 md:inline-flex ${
+                solid ? 'bg-red text-white hover:bg-red-deep' : 'bg-red text-white hover:bg-red-deep'
+              }`}
             >
               Connect
             </a>
@@ -95,22 +105,24 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              className="flex h-12 w-12 shrink-0 items-center justify-center lg:hidden"
+              className={`flex h-12 w-12 shrink-0 items-center justify-center ${
+                solid ? 'text-charcoal' : 'text-white'
+              } lg:hidden`}
             >
               <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
               <span className="relative block h-4 w-7" aria-hidden="true">
                 <span
-                  className={`absolute left-0 block h-[2px] w-full bg-charcoal transition-all duration-300 ${
+                  className={`absolute left-0 block h-[2px] w-full bg-current transition-all duration-300 ${
                     menuOpen ? 'top-[7px] rotate-45' : 'top-0'
                   }`}
                 />
                 <span
-                  className={`absolute left-0 top-[7px] block h-[2px] w-full bg-charcoal transition-all duration-300 ${
+                  className={`absolute left-0 top-[7px] block h-[2px] w-full bg-current transition-all duration-300 ${
                     menuOpen ? 'opacity-0' : 'opacity-100'
                   }`}
                 />
                 <span
-                  className={`absolute left-0 block h-[2px] w-full bg-charcoal transition-all duration-300 ${
+                  className={`absolute left-0 block h-[2px] w-full bg-current transition-all duration-300 ${
                     menuOpen ? 'top-[7px] -rotate-45' : 'top-[14px]'
                   }`}
                 />
@@ -120,7 +132,7 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
         </div>
       </div>
 
-      {/* Mobile menu panel — positioned below the fixed header, below it in z-order. */}
+      {/* Mobile menu panel — solid white, below the fixed header, below it in z-order. */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
