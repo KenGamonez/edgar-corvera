@@ -10,9 +10,9 @@ const aspectMap = {
 
 export function MediaGallery() {
   return (
-    <section id="media" className="bg-soft py-24 sm:py-32" aria-labelledby="media-heading">
+    <section id="media" className="bg-white" aria-labelledby="media-heading">
       <div className="section-pad">
-        <div className="container-site">
+        <div className="container-site section-y">
           <Reveal>
             <SectionHeading
               eyebrow="Gallery"
@@ -21,7 +21,7 @@ export function MediaGallery() {
             />
           </Reveal>
 
-          <div className="mt-14 grid auto-rows-fr gap-4 sm:gap-5 md:grid-cols-3 lg:mt-20 lg:gap-6">
+          <div className="mt-16 grid auto-rows-fr gap-4 sm:gap-5 md:grid-cols-3 lg:mt-20 lg:gap-6">
             {mediaItems.map((item, i) => (
               <Reveal
                 key={item.id}
@@ -30,22 +30,31 @@ export function MediaGallery() {
                   item.aspect === 'tall' ? 'md:min-h-[420px]' : ''
                 }`}
               >
-                <figure className="group relative h-full min-h-[220px] overflow-hidden bg-charcoal">
+                <figure className="group relative h-full min-h-[220px] overflow-hidden border border-line bg-charcoal">
                   <div
-                    className="absolute inset-0 bg-charcoal transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    className="absolute inset-0 bg-charcoal transition-transform duration-700 ease-out group-hover:scale-[1.02]"
                     aria-hidden="true"
                   />
-                  <figcaption className="absolute inset-0 flex flex-col justify-between p-6">
-                    <div className="flex items-start justify-between">
+                  <span
+                    className="absolute right-4 top-4 h-7 w-7 border-r-2 border-t-2 border-red opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                    aria-hidden="true"
+                  />
+                  <figcaption className="absolute inset-0 flex flex-col justify-between p-6 sm:p-7">
+                    <div className="flex items-start justify-between gap-4">
                       <span className="micro-label text-red">{item.category}</span>
                       <span
-                        className="mt-1 h-5 w-5 border-r-2 border-t-2 border-red opacity-60 transition-opacity duration-300 group-hover:opacity-100"
+                        className="font-display text-4xl font-extrabold leading-none tabular text-white/20"
                         aria-hidden="true"
-                      />
+                      >
+                        0{i + 1}
+                      </span>
                     </div>
                     <div>
-                      <p className="mb-3 h-1 w-0 bg-red transition-all duration-500 group-hover:w-12" />
-                      <p className="font-display text-xl font-bold uppercase tracking-tight text-white opacity-70 transition-opacity duration-400 group-hover:opacity-100 sm:text-2xl">
+                      <span
+                        className="mb-4 block h-1 w-0 bg-red transition-all duration-500 group-hover:w-12"
+                        aria-hidden="true"
+                      />
+                      <p className="font-display text-xl font-bold uppercase tracking-tight text-white/75 transition-colors duration-300 group-hover:text-white sm:text-2xl">
                         {item.caption}
                       </p>
                     </div>
@@ -54,6 +63,11 @@ export function MediaGallery() {
               </Reveal>
             ))}
           </div>
+
+          <p className="micro-label mt-8 text-charcoal/40">
+            Photographic documentation will be added here as official campaign photos become
+            available.
+          </p>
         </div>
       </div>
     </section>

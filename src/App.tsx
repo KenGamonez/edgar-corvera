@@ -6,8 +6,8 @@ import { About } from './components/About'
 import { PublicService } from './components/PublicService'
 import { LegislativeRecord } from './components/LegislativeRecord'
 import { CommitteeExperience } from './components/CommitteeExperience'
-import { ElectionStats } from './components/ElectionStats'
-import { VisionForTabon } from './components/VisionForTabon'
+import { Stats } from './components/Stats'
+import { Vision } from './components/Vision'
 import { Updates } from './components/Updates'
 import { MediaGallery } from './components/MediaGallery'
 import { Connect } from './components/Connect'
@@ -25,7 +25,7 @@ export default function App() {
         Skip to content
       </a>
 
-      <Navbar menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((v) => !v)} />
+      <Navbar menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((open) => !open)} />
 
       <main>
         <Hero />
@@ -34,8 +34,8 @@ export default function App() {
         <PublicService />
         <LegislativeRecord />
         <CommitteeExperience />
-        <ElectionStats />
-        <VisionForTabon />
+        <Stats />
+        <Vision />
         <Updates />
         <MediaGallery />
         <Connect />

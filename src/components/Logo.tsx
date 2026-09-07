@@ -1,50 +1,31 @@
 ﻿type LogoProps = {
   className?: string
-  variant?: 'dark' | 'light' | 'frame'
-  size?: 'sm' | 'md' | 'lg' | 'xl'
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'hero'
   alt?: string
 }
 
 const sizes = {
-  sm: 'h-14 w-auto sm:h-14',
-  md: 'h-12 w-auto sm:h-[3.25rem]',
-  lg: 'h-16 w-auto sm:h-[4.5rem] md:h-[5.25rem]',
-  xl: 'h-24 w-auto sm:h-[8.5rem] md:h-[10rem]',
+  sm: 'h-12 w-auto',
+  md: 'h-14 w-auto sm:h-16',
+  lg: 'h-20 w-auto sm:h-24',
+  xl: 'h-28 w-auto sm:h-32',
+  hero: 'h-auto w-full',
 } as const
 
 /**
- * Primary campaign brand mark.
- * Asset: /logo.png (from "Egar Corvera Logo.png" â€” filename typo preserved)
- * Horizontal proportions respected â€” never stretched.
+ * Campaign brand mark. Source asset: /logo.png (transparent PNG, multicolor).
+ * Proportions are fixed by the intrinsic ratio — the logo is never stretched.
  */
-export function Logo({
-  className = '',
-  variant = 'frame',
-  size = 'md',
-  alt = 'Edgar Corvera campaign logo',
-}: LogoProps) {
-  const img = (
+export function Logo({ className = '', size = 'md', alt = 'Edgar Corvera campaign logo' }: LogoProps) {
+  return (
     <img
       src="/logo.png"
       alt={alt}
-      className={`${sizes[size]} max-w-full object-contain object-left ${className}`}
-      width={480}
-      height={200}
+      width={1200}
+      height={480}
       decoding="async"
+      draggable={false}
+      className={`${sizes[size]} object-contain ${className}`}
     />
   )
-
-  if (variant === 'dark' || variant === 'light') {
-    return img
-  }
-
-  return (
-    <span className="inline-flex items-center justify-center overflow-hidden p-0">
-      {img}
-    </span>
-  )
 }
-
-
-
-

@@ -1,50 +1,48 @@
 import { Reveal } from './Reveal'
+import { SectionHeading } from './SectionHeading'
 import { updates } from '../data/content'
 
 export function Updates() {
+  const latest = updates[0]
+
   return (
-    <section id="updates" className="bg-white py-24 sm:py-32" aria-labelledby="updates-heading">
+    <section id="updates" className="bg-paper" aria-labelledby="updates-heading">
       <div className="section-pad">
-        <div className="container-site">
+        <div className="container-site section-y">
           <Reveal>
-            <p className="micro-label mb-6 flex items-center gap-3 text-red">
-              <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
-              Newsroom
-            </p>
-            <h2
-              id="updates-heading"
-              className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.005em] text-charcoal"
-            >
-              Campaign
-              <br />
-              updates.
-            </h2>
+            <SectionHeading
+              eyebrow="Newsroom"
+              title={<span id="updates-heading">Campaign updates.</span>}
+              description="Verified campaign activities and community updates are published here as the campaign takes shape."
+            />
           </Reveal>
 
-          <div className="mt-14 lg:mt-20">
-            {updates.length > 0 ? (
-              <Reveal>
-                <article className="flex h-full flex-col border border-charcoal/10 bg-soft p-8 sm:p-12">
+          {latest && (
+            <Reveal className="mt-16 lg:mt-20">
+              <article className="relative overflow-hidden border border-line bg-white">
+                <span
+                  className="pointer-events-none absolute -top-2 right-6 font-display text-[7rem] font-extrabold leading-none tabular text-charcoal/[0.04] select-none sm:text-[11rem]"
+                  aria-hidden="true"
+                >
+                  01
+                </span>
+                <div className="relative p-8 sm:p-14">
                   <div className="flex flex-wrap items-center justify-between gap-4">
-                    <span className="micro-label bg-red px-3 py-2 text-white">{updates[0].tag}</span>
-                    <span className="micro-label text-charcoal/40">{updates[0].date}</span>
+                    <span className="micro-label bg-red px-3 py-2 text-white">{latest.tag}</span>
+                    <span className="micro-label text-charcoal/40">{latest.date}</span>
                   </div>
-                  <p className="micro-label mt-10 text-charcoal/45">{updates[0].category}</p>
-                  <h3 className="mt-3 font-display text-3xl font-bold uppercase tracking-tight text-charcoal sm:text-4xl">
-                    {updates[0].title}
+                  <p className="micro-label mt-12 text-charcoal/45">{latest.category}</p>
+                  <h3 className="mt-3 font-display text-4xl font-bold uppercase tracking-tight text-charcoal sm:text-5xl">
+                    {latest.title}
                   </h3>
-                  <p className="mt-4 max-w-2xl text-charcoal/60">{updates[0].excerpt}</p>
-                  <div className="mt-10 h-1 w-12 bg-red" aria-hidden="true" />
-                </article>
-              </Reveal>
-            ) : (
-              <Reveal>
-                <div className="border border-charcoal/10 bg-soft p-12 text-center">
-                  <p className="text-charcoal/50">Campaign updates will be published here.</p>
+                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-charcoal/60 sm:text-lg text-pretty">
+                    {latest.excerpt}
+                  </p>
+                  <span className="red-bar mt-10 block" aria-hidden="true" />
                 </div>
-              </Reveal>
-            )}
-          </div>
+              </article>
+            </Reveal>
+          )}
         </div>
       </div>
     </section>

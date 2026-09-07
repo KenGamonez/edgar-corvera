@@ -1,20 +1,22 @@
 ﻿@import 'tailwindcss';
 
 @theme {
+  --color-black: #0a0a0a;
+  --color-charcoal: #16181c;
+  --color-ink: #1d1f24;
   --color-white: #ffffff;
-  --color-charcoal: #22262a;
-  --color-black: #17191c;
-  --color-blue: #123f9a;
-  --color-red: #c91f2b;
-  --color-gold: #f6b52e;
-  --color-soft: #f3f4f5;
-  --color-muted: #6b7280;
-  --color-line: rgba(34, 38, 42, 0.1);
+  --color-paper: #f4f4f2;
+  --color-muted: #6d7076;
+  --color-red: #c41e2a;
+  --color-red-deep: #a11623;
+
+  --color-line: rgba(22, 24, 28, 0.12);
+  --color-line-strong: rgba(22, 24, 28, 0.28);
+  --color-line-light: rgba(255, 255, 255, 0.14);
 
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Barlow Condensed', 'Plus Jakarta Sans', ui-sans-serif, sans-serif;
+  --font-display: 'Barlow Condensed', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-nav: 0 1px 0 rgba(34, 38, 42, 0.06), 0 12px 32px rgba(34, 38, 42, 0.04);
   --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -27,7 +29,7 @@
 
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -60,7 +62,7 @@
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--color-red) 18%, white);
+    background: color-mix(in srgb, var(--color-red) 16%, white);
     color: var(--color-charcoal);
   }
 
@@ -96,36 +98,72 @@
     text-wrap: balance;
   }
 
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
   .micro-label {
-    font-size: 0.625rem;
-    font-weight: 600;
-    letter-spacing: 0.2em;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    line-height: 1.4;
     text-transform: uppercase;
   }
 
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .eyebrow::before {
+    content: '';
+    width: 2rem;
+    height: 2px;
+    background: var(--color-red);
+  }
+
   .section-pad {
-    padding-inline: clamp(1.25rem, 5vw, 5rem);
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
   }
 
   .container-site {
     width: 100%;
-    max-width: 1360px;
+    max-width: 1200px;
     margin-inline: auto;
   }
 
   .section-y {
-    padding-block: clamp(4.5rem, 10vw, 8rem);
+    padding-block: clamp(5rem, 12vw, 9rem);
   }
 
   .editorial-rule {
     height: 1px;
-    background: var(--color-line);
     border: none;
+    background: var(--color-line);
   }
 
+  .editorial-rule-light {
+    height: 1px;
+    border: none;
+    background: var(--color-line-light);
+  }
+
+  .red-bar {
+    display: block;
+    width: 3.25rem;
+    height: 4px;
+    background: var(--color-red);
+  }
+
+  /* Desktop nav link treatment */
   .nav-link {
     position: relative;
-    padding-block: 0.3rem;
+    padding-block: 0.35rem;
   }
 
   .nav-link::after {

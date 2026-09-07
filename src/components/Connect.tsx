@@ -1,56 +1,42 @@
 import { Reveal } from './Reveal'
 import { Button } from './Button'
+import { brand } from '../data/content'
 
 export function Connect() {
   return (
-    <section
-      id="connect"
-      className="relative overflow-hidden bg-charcoal py-24 text-white sm:py-32 lg:py-40"
-      aria-labelledby="connect-heading"
-    >
-      <div className="section-pad relative">
-        <div className="container-site">
+    <section id="connect" className="bg-black text-white" aria-labelledby="connect-heading">
+      <div className="section-pad">
+        <div className="container-site section-y">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <p className="micro-label mb-6 flex items-center justify-center gap-3 text-red">
-                <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
-                Connect
+              <p className="eyebrow micro-label mb-8 justify-center text-white/50">
+                {brand.election}
               </p>
               <h2
                 id="connect-heading"
-                className="font-display text-[clamp(3rem,11vw,8rem)] font-bold uppercase leading-[0.85] tracking-[-0.005em] text-white"
+                className="font-display text-[clamp(3rem,11vw,8rem)] font-extrabold uppercase leading-[0.85] tracking-[0.002em] text-white"
               >
                 Stay
                 <br />
                 connected.
               </h2>
-              <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/60 sm:text-xl">
-                Follow updates, learn more about Edgar&apos;s public-service record, and stay
+              <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/60 sm:text-xl text-pretty">
+                Follow the campaign, learn more about Edgar&apos;s public-service record, and stay
                 informed about activities in Barangay Tabon.
               </p>
             </Reveal>
 
-            <Reveal delay={0.1}>
+            <Reveal delay={0.08}>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    /* Placeholder — no social URL invented */
-                  }}
-                >
-                  Connect
+                <Button href="#updates" variant="primary">
+                  Follow Updates
                 </Button>
-                <Button
-                  variant="outline-light"
-                  onClick={() => {
-                    /* Placeholder — no email invented */
-                  }}
-                >
-                  Send a Message
+                <Button href="#for-tabon" variant="outline-light">
+                  Vision for Tabon
                 </Button>
               </div>
               <p className="mt-8 text-xs text-white/40">
-                Contact channels intentionally omitted — to be added with verified details.
+                Official contact channels will be published here once verified.
               </p>
             </Reveal>
           </div>

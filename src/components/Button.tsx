@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'outline-light'
+type Variant = 'primary' | 'dark' | 'ghost' | 'outline-light'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant
@@ -10,12 +10,11 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-red text-white hover:bg-[#a81a24] active:bg-[#961821]',
-  secondary: 'bg-charcoal text-white hover:bg-black active:bg-black',
+  primary: 'bg-red text-white hover:bg-red-deep active:bg-red-deep',
+  dark: 'bg-charcoal text-white hover:bg-black active:bg-black',
   ghost:
-    'bg-transparent text-charcoal border border-charcoal/25 hover:border-charcoal/60 hover:bg-charcoal/[0.03]',
-  'outline-light':
-    'bg-transparent text-white border border-white/40 hover:border-white hover:bg-white/10',
+    'border border-line-strong text-charcoal hover:border-charcoal hover:bg-charcoal/[0.04] active:bg-charcoal/[0.07]',
+  'outline-light': 'border border-white/35 text-white hover:border-white hover:bg-white/10',
 }
 
 export function Button({
@@ -25,7 +24,7 @@ export function Button({
   className = '',
   ...rest
 }: ButtonProps) {
-  const classes = `group inline-flex items-center justify-center gap-3 px-7 py-3.5 text-[0.68rem] font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${variants[variant]} ${className}`
+  const classes = `group inline-flex items-center justify-center gap-3 px-7 py-3.5 text-[0.72rem] font-bold uppercase leading-none tracking-[0.16em] transition-colors duration-300 ${variants[variant]} ${className}`
 
   const content = (
     <>
