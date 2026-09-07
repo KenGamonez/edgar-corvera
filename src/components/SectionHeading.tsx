@@ -1,14 +1,12 @@
 import type { ReactNode } from 'react'
-import { AccentCluster } from './Motifs'
 
 type SectionHeadingProps = {
   eyebrow?: string
   title: ReactNode
   description?: ReactNode
   align?: 'left' | 'center'
-  showAccent?: boolean
-  className?: string
   dark?: boolean
+  className?: string
 }
 
 export function SectionHeading({
@@ -16,9 +14,8 @@ export function SectionHeading({
   title,
   description,
   align = 'left',
-  showAccent = false,
-  className = '',
   dark = false,
+  className = '',
 }: SectionHeadingProps) {
   return (
     <div
@@ -28,16 +25,12 @@ export function SectionHeading({
         <div
           className={`mb-5 flex items-center gap-3 ${align === 'center' ? 'justify-center' : ''}`}
         >
-          {showAccent && <AccentCluster />}
-          <p
-            className={`micro-label ${dark ? 'text-white/55' : 'text-blue'}`}
-          >
-            {eyebrow}
-          </p>
+          <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
+          <p className="micro-label text-red">{eyebrow}</p>
         </div>
       )}
       <h2
-        className={`font-display text-[clamp(2.25rem,5vw,4.25rem)] font-semibold leading-[0.98] tracking-[-0.03em] text-balance ${
+        className={`font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.005em] text-balance ${
           dark ? 'text-white' : 'text-charcoal'
         }`}
       >
@@ -46,7 +39,7 @@ export function SectionHeading({
       {description && (
         <p
           className={`mt-6 max-w-xl text-base leading-relaxed sm:text-lg ${
-            dark ? 'text-white/65' : 'text-charcoal/65'
+            dark ? 'text-white/60' : 'text-charcoal/60'
           } ${align === 'center' ? 'mx-auto' : ''}`}
         >
           {description}

@@ -1,49 +1,36 @@
 import { Reveal } from './Reveal'
 import { Button } from './Button'
-import { WaveMotif, AccentCluster } from './Motifs'
 
 export function Connect() {
   return (
     <section
       id="connect"
-      className="relative overflow-hidden bg-white py-24 sm:py-32 lg:py-40"
+      className="relative overflow-hidden bg-charcoal py-24 text-white sm:py-32 lg:py-40"
       aria-labelledby="connect-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          background:
-            'radial-gradient(ellipse 50% 60% at 50% 100%, rgba(18,63,154,0.06), transparent 70%)',
-        }}
-      />
-
       <div className="section-pad relative">
         <div className="container-site">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <p className="micro-label text-blue mb-5">Connect</p>
+              <p className="micro-label mb-6 flex items-center justify-center gap-3 text-red">
+                <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
+                Connect
+              </p>
               <h2
                 id="connect-heading"
-                className="font-display text-[clamp(3rem,10vw,7rem)] font-semibold leading-[0.9] tracking-[-0.04em] text-charcoal"
+                className="font-display text-[clamp(3rem,11vw,8rem)] font-bold uppercase leading-[0.85] tracking-[-0.005em] text-white"
               >
-                STAY
+                Stay
                 <br />
-                CONNECTED
+                connected.
               </h2>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <div className="mx-auto mt-8 flex max-w-sm justify-center">
-                <WaveMotif className="w-full" />
-              </div>
-              <p className="mx-auto mt-8 max-w-lg text-base leading-relaxed text-charcoal/65 sm:text-lg">
+              <p className="mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/60 sm:text-xl">
                 Follow updates, learn more about Edgar&apos;s public-service record, and stay
                 informed about activities in Barangay Tabon.
               </p>
             </Reveal>
 
-            <Reveal delay={0.18}>
+            <Reveal delay={0.1}>
               <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
                 <Button
                   variant="primary"
@@ -54,7 +41,7 @@ export function Connect() {
                   Connect
                 </Button>
                 <Button
-                  variant="ghost"
+                  variant="outline-light"
                   onClick={() => {
                     /* Placeholder — no email invented */
                   }}
@@ -62,12 +49,9 @@ export function Connect() {
                   Send a Message
                 </Button>
               </div>
-              <p className="mt-8 text-xs text-charcoal/40">
+              <p className="mt-8 text-xs text-white/40">
                 Contact channels intentionally omitted — to be added with verified details.
               </p>
-              <div className="mt-10 flex justify-center">
-                <AccentCluster />
-              </div>
             </Reveal>
           </div>
         </div>

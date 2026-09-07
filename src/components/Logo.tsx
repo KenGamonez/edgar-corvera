@@ -1,4 +1,4 @@
-type LogoProps = {
+﻿type LogoProps = {
   className?: string
   variant?: 'dark' | 'light' | 'frame'
   size?: 'sm' | 'md' | 'lg' | 'xl'
@@ -6,16 +6,16 @@ type LogoProps = {
 }
 
 const sizes = {
-  sm: 'h-8 w-auto sm:h-9',
-  md: 'h-10 w-auto sm:h-11',
-  lg: 'h-14 w-auto sm:h-16 md:h-[4.5rem]',
-  xl: 'h-20 w-auto sm:h-28 md:h-36',
+  sm: 'h-14 w-auto sm:h-14',
+  md: 'h-12 w-auto sm:h-[3.25rem]',
+  lg: 'h-16 w-auto sm:h-[4.5rem] md:h-[5.25rem]',
+  xl: 'h-24 w-auto sm:h-[8.5rem] md:h-[10rem]',
 } as const
 
 /**
  * Primary campaign brand mark.
- * Asset: /logo.png (from "Egar Corvera Logo.png" — filename typo preserved)
- * Horizontal proportions respected — never stretched.
+ * Asset: /logo.png (from "Egar Corvera Logo.png" â€” filename typo preserved)
+ * Horizontal proportions respected â€” never stretched.
  */
 export function Logo({
   className = '',
@@ -39,8 +39,12 @@ export function Logo({
   }
 
   return (
-    <span className="inline-flex items-center justify-center overflow-hidden bg-charcoal p-1 sm:p-1.5">
+    <span className="inline-flex items-center justify-center overflow-hidden p-0">
       {img}
     </span>
   )
 }
+
+
+
+

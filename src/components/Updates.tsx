@@ -1,5 +1,4 @@
 import { Reveal } from './Reveal'
-import { SectionHeading } from './SectionHeading'
 import { updates } from '../data/content'
 
 export function Updates() {
@@ -8,68 +7,38 @@ export function Updates() {
       <div className="section-pad">
         <div className="container-site">
           <Reveal>
-            <SectionHeading
-              eyebrow="Newsroom"
-              title={<span id="updates-heading">LATEST UPDATES</span>}
-              description="Campaign updates, community activities, public-service information and verified announcements."
-              showAccent
-            />
+            <p className="micro-label mb-6 flex items-center gap-3 text-red">
+              <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
+              Newsroom
+            </p>
+            <h2
+              id="updates-heading"
+              className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.005em] text-charcoal"
+            >
+              Campaign
+              <br />
+              updates.
+            </h2>
           </Reveal>
 
-          <div className="mt-14 grid gap-8 lg:mt-16 lg:grid-cols-12">
+          <div className="mt-14 lg:mt-20">
             {updates.length > 0 ? (
-              <>
-                {/* Featured */}
-                <Reveal className="lg:col-span-7" delay={0.05}>
-                  <article className="group flex h-full flex-col border border-charcoal/10 transition-shadow duration-500 hover:shadow-[var(--shadow-soft)]">
-                    <div className="relative aspect-[16/10] overflow-hidden bg-soft">
-                      <div
-                        className="absolute inset-0 bg-gradient-to-br from-blue/10 via-transparent to-charcoal/5 transition-transform duration-700 group-hover:scale-105"
-                        aria-hidden="true"
-                      />
-                      <div className="absolute left-5 top-5">
-                        <span className="micro-label bg-charcoal px-3 py-1.5 text-gold">
-                          {updates[0].tag}
-                        </span>
-                      </div>
-                      <div className="absolute bottom-5 left-5 right-5">
-                        <p className="micro-label text-blue">{updates[0].category}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-1 flex-col p-7 sm:p-9">
-                      <p className="micro-label text-charcoal/40">{updates[0].date}</p>
-                      <h3 className="mt-4 font-display text-2xl font-semibold tracking-tight text-charcoal sm:text-3xl md:text-4xl">
-                        {updates[0].title}
-                      </h3>
-                      <p className="mt-4 flex-1 text-charcoal/60">{updates[0].excerpt}</p>
-                    </div>
-                  </article>
-                </Reveal>
-
-                {/* Stack */}
-                {updates.length > 1 && (
-                  <div className="flex flex-col gap-8 lg:col-span-5">
-                    {updates.slice(1).map((item, i) => (
-                      <Reveal key={item.id} delay={0.1 + i * 0.08} className="flex-1">
-                        <article className="group flex h-full flex-col border-t border-charcoal/10 pt-8 first:border-t-0 first:pt-0 lg:border-t lg:pt-8 lg:first:border-t lg:first:pt-8">
-                          <div className="flex items-center gap-3">
-                            <span className="micro-label text-gold">{item.tag}</span>
-                            <span className="h-px flex-1 bg-charcoal/10" />
-                            <span className="micro-label text-charcoal/35">{item.date}</span>
-                          </div>
-                          <p className="micro-label mt-5 text-blue">{item.category}</p>
-                          <h3 className="mt-3 font-display text-xl font-semibold tracking-tight transition-colors group-hover:text-blue sm:text-2xl">
-                            {item.title}
-                          </h3>
-                          <p className="mt-3 text-sm leading-relaxed text-charcoal/60">{item.excerpt}</p>
-                        </article>
-                      </Reveal>
-                    ))}
+              <Reveal>
+                <article className="flex h-full flex-col border border-charcoal/10 bg-soft p-8 sm:p-12">
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <span className="micro-label bg-red px-3 py-2 text-white">{updates[0].tag}</span>
+                    <span className="micro-label text-charcoal/40">{updates[0].date}</span>
                   </div>
-                )}
-              </>
+                  <p className="micro-label mt-10 text-charcoal/45">{updates[0].category}</p>
+                  <h3 className="mt-3 font-display text-3xl font-bold uppercase tracking-tight text-charcoal sm:text-4xl">
+                    {updates[0].title}
+                  </h3>
+                  <p className="mt-4 max-w-2xl text-charcoal/60">{updates[0].excerpt}</p>
+                  <div className="mt-10 h-1 w-12 bg-red" aria-hidden="true" />
+                </article>
+              </Reveal>
             ) : (
-              <Reveal className="lg:col-span-12">
+              <Reveal>
                 <div className="border border-charcoal/10 bg-soft p-12 text-center">
                   <p className="text-charcoal/50">Campaign updates will be published here.</p>
                 </div>

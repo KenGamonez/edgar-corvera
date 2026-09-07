@@ -10,14 +10,12 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const variants: Record<Variant, string> = {
-  primary:
-    'bg-red text-white hover:bg-[#a81a24] active:bg-[#961821]',
-  secondary:
-    'bg-blue text-white hover:bg-[#0e3480] active:bg-[#0c2d6e]',
+  primary: 'bg-red text-white hover:bg-[#a81a24] active:bg-[#961821]',
+  secondary: 'bg-charcoal text-white hover:bg-black active:bg-black',
   ghost:
-    'bg-transparent text-charcoal border border-charcoal/18 hover:border-charcoal/45 hover:bg-charcoal/[0.03]',
+    'bg-transparent text-charcoal border border-charcoal/25 hover:border-charcoal/60 hover:bg-charcoal/[0.03]',
   'outline-light':
-    'bg-transparent text-white border border-white/35 hover:border-white hover:bg-white/[0.06]',
+    'bg-transparent text-white border border-white/40 hover:border-white hover:bg-white/10',
 }
 
 export function Button({
@@ -27,13 +25,13 @@ export function Button({
   className = '',
   ...rest
 }: ButtonProps) {
-  const classes = `group relative inline-flex items-center justify-center gap-3 overflow-hidden px-7 py-3.5 text-[0.68rem] font-semibold tracking-[0.18em] uppercase transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${variants[variant]} ${className}`
+  const classes = `group inline-flex items-center justify-center gap-3 px-7 py-3.5 text-[0.68rem] font-semibold tracking-[0.18em] uppercase transition-colors duration-300 ${variants[variant]} ${className}`
 
   const content = (
     <>
-      <span className="relative z-10">{children}</span>
+      <span>{children}</span>
       <span
-        className="relative z-10 inline-block translate-x-0 transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1.5"
+        className="inline-block opacity-70 transition-transform duration-300 group-hover:translate-x-1"
         aria-hidden="true"
       >
         →

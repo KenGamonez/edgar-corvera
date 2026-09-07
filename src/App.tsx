@@ -12,7 +12,6 @@ import { Updates } from './components/Updates'
 import { MediaGallery } from './components/MediaGallery'
 import { Connect } from './components/Connect'
 import { Footer } from './components/Footer'
-import { WaveDivider } from './components/Motifs'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -31,7 +30,6 @@ export default function App() {
       <main>
         <Hero />
         <Introduction />
-        <WaveDivider className="bg-white py-2" />
         <About />
         <PublicService />
         <LegislativeRecord />

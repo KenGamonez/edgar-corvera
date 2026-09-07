@@ -1,5 +1,4 @@
 import { Reveal } from './Reveal'
-import { WaveMotif, AccentCluster } from './Motifs'
 import { visionAreas } from '../data/content'
 
 export function VisionForTabon() {
@@ -9,65 +8,45 @@ export function VisionForTabon() {
       className="relative overflow-hidden bg-charcoal py-24 text-white sm:py-32"
       aria-labelledby="vision-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden="true"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 100% 0%, rgba(18,63,154,0.25), transparent 55%)',
-        }}
-      />
-
       <div className="section-pad relative">
         <div className="container-site">
           <Reveal>
-            <div className="flex flex-wrap items-end justify-between gap-6">
-              <div>
-                <p className="micro-label text-gold mb-5">For Tabon</p>
-                <h2
-                  id="vision-heading"
-                  className="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.035em]"
-                >
-                  A VISION
-                  <br />
-                  FOR TABON
-                </h2>
-              </div>
-              <AccentCluster />
-            </div>
-            <div className="mt-8 max-w-lg">
-              <WaveMotif className="w-full" />
-              <p className="mt-6 text-base leading-relaxed text-white/55 sm:text-lg">
-                Community priorities and areas of focus for Barangay Tabon — structured for discussion and development.
+            <p className="micro-label mb-6 flex items-center gap-3 text-red">
+              <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
+              For Tabon
+            </p>
+            <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+              <h2
+                id="vision-heading"
+                className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-bold uppercase leading-[0.88] tracking-[-0.005em] text-white"
+              >
+                What Edgar
+                <br />
+                wants for Tabon.
+              </h2>
+              <p className="max-w-md text-lg leading-relaxed text-white/55">
+                Community priorities and areas of focus for Barangay Tabon — structured for
+                discussion and development.
               </p>
             </div>
           </Reveal>
 
-          <ul className="mt-14 border-t border-white/10 lg:mt-20">
+          <ul className="mt-16 border-t border-white/10 sm:mt-20">
             {visionAreas.map((area, i) => (
               <Reveal key={area.number} delay={i * 0.04}>
-                <li>
-                  <div className="group flex w-full flex-col gap-3 border-b border-white/10 py-7 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:py-9">
-                    <div className="flex items-baseline gap-5 sm:gap-8">
-                      <span className="font-display text-sm text-gold/70 tabular-nums transition-all duration-300 group-hover:text-gold group-hover:tracking-widest">
-                        {area.number}
-                      </span>
-                      <div>
-                        <span className="font-display text-2xl font-semibold tracking-tight transition-transform duration-400 group-hover:translate-x-2 sm:text-3xl md:text-4xl">
-                          {area.title}
-                          {area.subtitle && (
-                            <>
-                              <br className="sm:hidden" />
-                              <span className="text-white/50"> {area.subtitle}</span>
-                            </>
-                          )}
-                        </span>
-                        <p className="mt-2 text-sm leading-relaxed text-white/40 sm:text-base">
-                          {area.description}
-                        </p>
-                      </div>
-                    </div>
+                <li className="group grid gap-3 border-b border-white/10 py-8 sm:grid-cols-12 sm:items-baseline sm:gap-8 sm:py-10">
+                  <span className="font-display text-sm font-semibold tabular-nums text-red sm:col-span-1">
+                    {area.number}
+                  </span>
+                  <div className="sm:col-span-5">
+                    <h3 className="font-display text-3xl font-bold uppercase leading-tight tracking-tight transition-colors duration-300 group-hover:text-red sm:text-5xl">
+                      {area.title}
+                      {area.subtitle && (
+                        <span className="block text-white/50">{area.subtitle}</span>
+                      )}
+                    </h3>
                   </div>
+                  <p className="text-white/55 sm:col-span-6 sm:text-lg">{area.description}</p>
                 </li>
               </Reveal>
             ))}

@@ -16,12 +16,12 @@ export function MediaGallery() {
           <Reveal>
             <SectionHeading
               eyebrow="Gallery"
-              title={<span id="media-heading">IN THE COMMUNITY</span>}
+              title={<span id="media-heading">In the community.</span>}
               description="Documentary photography of community life, public service, and everyday moments in Tabon."
             />
           </Reveal>
 
-          <div className="mt-14 grid auto-rows-fr gap-4 sm:gap-5 md:grid-cols-3 lg:mt-16 lg:gap-6">
+          <div className="mt-14 grid auto-rows-fr gap-4 sm:gap-5 md:grid-cols-3 lg:mt-20 lg:gap-6">
             {mediaItems.map((item, i) => (
               <Reveal
                 key={item.id}
@@ -32,32 +32,20 @@ export function MediaGallery() {
               >
                 <figure className="group relative h-full min-h-[220px] overflow-hidden bg-charcoal">
                   <div
-                    className="absolute inset-0 bg-gradient-to-br from-charcoal via-[#2a3036] to-blue/40 transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="absolute inset-0 bg-charcoal transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                     aria-hidden="true"
                   />
-                  <div
-                    className="absolute inset-0 opacity-30"
-                    style={{
-                      backgroundImage:
-                        'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
-                      backgroundSize: '24px 24px',
-                    }}
-                    aria-hidden="true"
-                  />
-
-                  <figcaption className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
+                  <figcaption className="absolute inset-0 flex flex-col justify-between p-6">
                     <div className="flex items-start justify-between">
-                      <span className="micro-label translate-y-1 text-gold opacity-0 transition-all duration-400 group-hover:translate-y-0 group-hover:opacity-100">
-                        {item.category}
-                      </span>
+                      <span className="micro-label text-red">{item.category}</span>
                       <span
-                        className="h-6 w-6 border-r border-t border-white/30 opacity-50 transition-opacity group-hover:opacity-100"
+                        className="mt-1 h-5 w-5 border-r-2 border-t-2 border-red opacity-60 transition-opacity duration-300 group-hover:opacity-100"
                         aria-hidden="true"
                       />
                     </div>
                     <div>
-                      <div className="mb-3 h-px w-0 bg-red transition-all duration-500 group-hover:w-12" />
-                      <p className="translate-y-2 font-display text-lg font-medium tracking-tight text-white opacity-0 transition-all duration-400 group-hover:translate-y-0 group-hover:opacity-100 sm:text-xl">
+                      <p className="mb-3 h-1 w-0 bg-red transition-all duration-500 group-hover:w-12" />
+                      <p className="font-display text-xl font-bold uppercase tracking-tight text-white opacity-70 transition-opacity duration-400 group-hover:opacity-100 sm:text-2xl">
                         {item.caption}
                       </p>
                     </div>

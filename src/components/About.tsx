@@ -1,74 +1,54 @@
 import { Reveal } from './Reveal'
-import { SectionHeading } from './SectionHeading'
 import { ImagePlaceholder } from './ImagePlaceholder'
-import { SunMotif } from './Motifs'
-import { about, brand } from '../data/content'
-
-const bioPoints = [
-  { label: 'Education', value: about.education },
-  { label: 'Profession', value: about.profession },
-  { label: 'Industry', value: about.previousRole },
-  { label: 'Public service', value: about.publicService },
-]
+import { about } from '../data/content'
 
 export function About() {
   return (
-    <section id="about" className="relative bg-soft py-24 sm:py-32" aria-labelledby="about-heading">
+    <section id="about" className="bg-white py-24 sm:py-32" aria-labelledby="about-heading">
       <div className="section-pad">
-        <div className="container-site">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Biography"
-              title={
-                <span id="about-heading">
-                  MEET
-                  <br />
-                  EDGAR
-                </span>
-              }
-              showAccent
-            />
-          </Reveal>
-
-          <div className="mt-14 grid items-start gap-12 lg:mt-20 lg:grid-cols-12 lg:gap-10">
-            <Reveal className="relative lg:col-span-5" delay={0.05}>
+        <div className="container-site grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+          <Reveal className="lg:col-span-5">
+            <div className="relative">
+              <div className="absolute -left-3 top-8 h-[55%] w-[3px] bg-red" aria-hidden="true" />
               <ImagePlaceholder
                 label="Official Portrait"
+                sublabel={about.profession}
                 aspect="portrait"
                 tone="charcoal"
-                className="shadow-[var(--shadow-soft)]"
               />
-              <div className="absolute -bottom-4 -right-4 hidden sm:block" aria-hidden="true">
-                <SunMotif className="h-12 w-12 opacity-90" />
-              </div>
-            </Reveal>
+            </div>
+          </Reveal>
 
-            <Reveal className="lg:col-span-7 lg:pt-4" delay={0.1}>
-              <p className="font-display text-3xl font-semibold leading-tight tracking-tight text-charcoal sm:text-4xl">
-                Electrical Engineer. Public Servant. Experienced Leader.
-              </p>
-              <p className="mt-8 text-base leading-relaxed text-charcoal/70 sm:text-lg">
-                An electrical engineer and public servant with project-management experience and multiple
-                terms as Bislig City councilor — now seeking to serve Barangay Tabon as Barangay
-                Captain.
-              </p>
-              <div className="mt-10 space-y-5 border-t border-charcoal/10 pt-8">
-                <div>
-                  <p className="micro-label text-charcoal/40">Education</p>
-                  <p className="mt-2 font-medium">{about.education}</p>
-                </div>
-                <div>
-                  <p className="micro-label text-charcoal/40">Background</p>
-                  <p className="mt-2 font-medium">{about.profession}</p>
-                  <p className="mt-1 text-charcoal/65">{about.previousRole}</p>
-                </div>
-                <div>
-                  <p className="micro-label text-charcoal/40">Public Service</p>
-                  <p className="mt-2 font-medium">{about.publicService}</p>
-                </div>
+          <Reveal className="lg:col-span-7" delay={0.08}>
+            <p className="micro-label mb-6 flex items-center gap-3 text-red">
+              <span className="inline-block h-px w-8 bg-red" aria-hidden="true" />
+              About Edgar
+            </p>
+            <h2
+              id="about-heading"
+              className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-[-0.005em] text-charcoal"
+            >
+              A leader
+              <br />
+              for Tabon.
+            </h2>
+            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-charcoal/70">{about.intro}</p>
+
+            <dl className="mt-10 grid gap-0 border-t border-charcoal/10 sm:grid-cols-3">
+              <div className="border-b border-charcoal/10 py-6 sm:border-b-0 sm:border-r sm:py-8 sm:pr-6">
+                <dt className="micro-label text-charcoal/40">Education</dt>
+                <dd className="mt-3 font-medium">{about.education}</dd>
               </div>
-            </Reveal>
-          </div>
+              <div className="border-b border-charcoal/10 py-6 sm:border-b-0 sm:border-r sm:px-6 sm:py-8">
+                <dt className="micro-label text-charcoal/40">Background</dt>
+                <dd className="mt-3 font-medium">{about.previousRole}</dd>
+              </div>
+              <div className="py-6 sm:py-8 sm:pl-6">
+                <dt className="micro-label text-charcoal/40">Public Service</dt>
+                <dd className="mt-3 font-medium">{about.publicService}</dd>
+              </div>
+            </dl>
+          </Reveal>
         </div>
       </div>
     </section>
