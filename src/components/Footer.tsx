@@ -21,6 +21,16 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
+        <div className="footer__cta">
+          <div className="footer__cta-copy">
+            <p className="footer__cta-eyebrow">Digital Campaign</p>
+            <p className="footer__cta-title">A more connected campaign.</p>
+          </div>
+          <a className="footer__cta-btn" href="/digital-campaign">
+            See the system
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
         <div className="footer__brand">
           <img
             src="/brand/logo.png"

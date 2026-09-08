@@ -7,9 +7,11 @@ import ForTabon from "./components/ForTabon";
 import Updates from "./components/Updates";
 import Media from "./components/Media";
 import GetInvolved from "./components/GetInvolved";
+import DigitalCta from "./components/DigitalCta";
 import VolunteerCta from "./components/VolunteerCta";
 import Footer from "./components/Footer";
 import Volunteer from "./components/Volunteer";
+import DigitalCampaign from "./components/DigitalCampaign";
 import { AuthProvider } from "./admin/AuthContext";
 import AdminApp from "./admin/AdminApp";
 import "./styles/app.css";
@@ -26,6 +28,7 @@ function PublicSite() {
         <Updates />
         <Media />
         <GetInvolved />
+        <DigitalCta />
         <VolunteerCta />
       </main>
       <Footer />
@@ -36,6 +39,7 @@ function PublicSite() {
 function PageRouter({ path }: { path: string }) {
   if (path.startsWith("/admin")) return <AdminApp path={path} />;
   if (path === "/volunteer") return <Volunteer />;
+  if (path === "/digital-campaign") return <DigitalCampaign />;
   return <PublicSite />;
 }
 
@@ -70,7 +74,8 @@ export default function App() {
       }
       if (url.origin !== window.location.origin) return;
       const p = url.pathname;
-      const inApp = p === "/" || p === "/volunteer" || p.startsWith("/admin");
+      const inApp =
+        p === "/" || p === "/volunteer" || p === "/digital-campaign" || p.startsWith("/admin");
       if (!inApp) return;
       // Already on home: native anchor handles the hash scroll
       if (p === "/" && window.location.pathname === "/") return;
