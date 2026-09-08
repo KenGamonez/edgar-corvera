@@ -69,6 +69,7 @@ h4 {
   line-height: 1.08;
   letter-spacing: -0.015em;
   color: var(--ink);
+  text-wrap: balance;
 }
 
 :focus-visible {

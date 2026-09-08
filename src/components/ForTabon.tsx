@@ -171,7 +171,10 @@ export default function ForTabon() {
               {FEATURES.map((f, i) =>
                 f.link ? (
                   <Reveal key={f.key} delay={i * 50}>
-                    <a className="tabon__card tabon__card--link" href={f.link}>
+                    <a
+                      className={`tabon__card tabon__card--link ${i === 0 ? "tabon__card--lead" : ""}`}
+                      href={f.link}
+                    >
                       <span className="tabon__card-n">{f.num}</span>
                       <span className="tabon__card-title">{f.title}</span>
                       <span className="tabon__card-text">{f.text}</span>
@@ -181,7 +184,7 @@ export default function ForTabon() {
                 ) : (
                   <Reveal key={f.key} delay={i * 50}>
                     <button
-                      className="tabon__card tabon__card--btn"
+                      className={`tabon__card tabon__card--btn ${i === 0 ? "tabon__card--lead" : ""}`}
                       type="button"
                       onClick={() => openFeature(f.key as HubFeature)}
                       aria-label={`Open ${f.title}`}

@@ -5,12 +5,13 @@ import "./hero.css";
 export default function Hero() {
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const onMove = (e: MouseEvent) => {
       const panel = document.querySelector<HTMLElement>(".hero__panel");
       if (!panel) return;
       const { innerWidth, innerHeight } = window;
-      const x = (e.clientX / innerWidth - 0.5) * 10;
-      const y = (e.clientY / innerHeight - 0.5) * 10;
+      const x = (e.clientX / innerWidth - 0.5) * 6;
+      const y = (e.clientY / innerHeight - 0.5) * 6;
       panel.style.setProperty("--px", `${x.toFixed(2)}px`);
       panel.style.setProperty("--py", `${y.toFixed(2)}px`);
     };
@@ -84,8 +85,8 @@ export default function Hero() {
                 Barangay Tabon · Bislig City · Surigao del Sur
               </p>
             </div>
-            <span className="hero__panel-tick hero__panel-tick--blue" aria-hidden="true" />
-            <span className="hero__panel-tick hero__panel-tick--red" aria-hidden="true" />
+            <span className="hero__panel-corner hero__panel-corner--tl" aria-hidden="true" />
+            <span className="hero__panel-corner hero__panel-corner--br" aria-hidden="true" />
           </div>
         </div>
 

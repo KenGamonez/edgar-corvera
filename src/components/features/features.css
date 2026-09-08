@@ -93,6 +93,48 @@
   transform: translateX(4px);
 }
 
+.tabon__card--lead {
+  background:
+    radial-gradient(
+      90% 120% at 15% 0%,
+      rgba(255, 255, 255, 0.08) 0%,
+      rgba(255, 255, 255, 0) 55%
+    ),
+    var(--blue-deep);
+  border-color: rgba(10, 30, 100, 0.5);
+}
+
+.tabon__card--lead .tabon__card-n {
+  color: var(--red);
+}
+
+.tabon__card--lead .tabon__card-title {
+  color: var(--white);
+}
+
+.tabon__card--lead .tabon__card-text {
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.tabon__card--lead .tabon__card-go {
+  color: var(--white);
+}
+
+.tabon__card--lead::before {
+  background: var(--red);
+}
+
+.tabon__card--lead:hover {
+  border-color: rgba(255, 255, 255, 0.35);
+  box-shadow: var(--shadow-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabon__card--lead:hover {
+    transform: none;
+  }
+}
+
 /* ---- Active feature panel ---- */
 .feat {
   animation: feat-in 0.45s var(--ease-out);

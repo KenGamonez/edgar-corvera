@@ -109,11 +109,6 @@
   max-width: 60ch;
 }
 
-.about__markers {
-  margin-top: 2.2rem;
-  border-top: 1px solid var(--stone);
-}
-
 /* ---- Chapters ---- */
 .about__chapters {
   margin-top: 2.4rem;

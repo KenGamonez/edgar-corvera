@@ -27,6 +27,23 @@ export default function Nav() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth > 900) setOpen(false);
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <header
       className={`nav ${scrolled || open ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}
@@ -72,6 +89,11 @@ export default function Nav() {
               </li>
             ))}
           </ul>
+
+          <div className="nav__menu-foot">
+            <span>Edgar Corvera</span>
+            <span>Barangay Tabon · Bislig City · Surigao del Sur</span>
+          </div>
         </nav>
       </div>
     </header>
