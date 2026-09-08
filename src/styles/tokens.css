@@ -1,0 +1,63 @@
+/* ============================================================
+   DESIGN TOKENS — derived from the Edgar Corvera logo
+   The logo is a charcoal wordmark with a Philippine flag motif
+   (deep royal blue + civic red) on transparent.
+   This light system uses the logo's blue/red as the brand
+   identity and the charcoal strictly as text ink.
+   ============================================================ */
+
+:root {
+  /* ---- Text ink (logo charcoal — for type only, never backgrounds) ---- */
+  --ink: #161a24;          /* headings — softened logo charcoal   */
+  --ink-2: #2a2f3b;        /* secondary emphasis                 */
+  --ink-soft: #555c6b;     /* supporting / caption text           */
+  --ink-faint: #767d8c;    /* labels / metadata                   */
+
+  /* ---- Canvas — warm whites & ivories (primary surfaces) ---- */
+  --white: #ffffff;
+  --ivory: #f8f5ef;        /* warm white — hero, alternates       */
+  --ivory-2: #f1ede4;      /* warm white raised                  */
+  --cream: #f3eee1;        /* warm cream — community field        */
+  --cream-2: #ece4d2;      /* deeper cream                        */
+
+  /* ---- Intermediate fields (color journey) ---- */
+  --bone: #f6f5ef;         /* warm grey — updates field           */
+  --wash: #f0f3fa;         /* pale cool field — media             */
+
+  /* ---- Neutrals ---- */
+  --stone: #e7e2d6;        /* hairline on light                   */
+  --stone-2: #d8d2c4;      /* stronger hairline                   */
+
+  /* ---- Brand blue — primary identity from the logo flag ---- */
+  --blue: #0a37ac;         /* logo royal blue                     */
+  --blue-deep: #071f66;    /* deep navy — depth, footer           */
+  --blue-night: #06153f;   /* deepest navy — footer base          */
+  --blue-tint: #edf1fc;    /* very light blue field               */
+  --blue-tint-2: #dfe7fa;  /* light blue field                    */
+
+  /* ---- Brand red — accent from the logo flag ---- */
+  --red: #d7000f;
+  --red-deep: #9a060c;
+
+  /* ---- Shadows (subtle, warm) ---- */
+  --shadow-1: 0 1px 2px rgba(22, 22, 34, 0.05);
+  --shadow-2: 0 14px 40px rgba(22, 22, 34, 0.08);
+
+  /* ---- Type ---- */
+  --font-display: "Archivo Expanded", "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* ---- Rhythm ---- */
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --section: clamp(5rem, 9vw, 8.5rem);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* ---- Radii ---- */
+  --radius-s: 4px;
+  --radius-m: 10px;
+  --radius-l: 18px;
+}

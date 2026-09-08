@@ -1,0 +1,309 @@
+/* ============================================================
+   FOR TABON HUB — shared layout for feature cards + panels
+   ============================================================ */
+
+/* ---- Feature card grid ---- */
+.tabon__features {
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.1rem;
+}
+
+.tabon__card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.8rem;
+  text-align: left;
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-m);
+  padding: clamp(1.4rem, 2vw, 1.8rem);
+  min-height: 13.5rem;
+  overflow: hidden;
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out),
+    border-color 0.3s var(--ease-out);
+}
+
+.tabon__card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 3px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.tabon__card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(10, 55, 172, 0.3);
+}
+
+.tabon__card:hover::before,
+.tabon__card:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.tabon__card-n {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--red);
+}
+
+.tabon__card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.tabon__card-text {
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 34ch;
+}
+
+.tabon__card-go {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tabon__card-go::after {
+  content: "\2192";
+  font-size: 0.95rem;
+  transition: transform 0.25s var(--ease-out);
+}
+
+.tabon__card:hover .tabon__card-go::after {
+  transform: translateX(4px);
+}
+
+/* ---- Active feature panel ---- */
+.feat {
+  animation: feat-in 0.45s var(--ease-out);
+}
+
+@keyframes feat-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.feat__top {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  margin-bottom: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.feat__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue);
+  border: 1px solid rgba(10, 55, 172, 0.3);
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  transition: background 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.feat__back::before {
+  content: "\2190";
+  font-size: 0.9rem;
+}
+
+.feat__back:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.feat__eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.feat__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.4vw, 2.7rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-top: 0.9rem;
+  max-width: 22ch;
+}
+
+.feat__intro {
+  margin-top: 1rem;
+  font-size: clamp(0.98rem, 1.1vw, 1.06rem);
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+/* ---- Panel body shell ---- */
+.feat__body {
+  margin-top: clamp(2rem, 4vw, 3rem);
+  display: grid;
+  gap: 2.4rem;
+}
+
+.feat__card {
+  background: var(--white);
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-m);
+  padding: clamp(1.5rem, 2.6vw, 2.2rem);
+  box-shadow: var(--shadow-1);
+}
+
+.feat__card-title {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.3rem;
+}
+
+.feat__columns {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+  gap: clamp(1.8rem, 3.4vw, 3.2rem);
+  align-items: start;
+}
+
+/* ---- Empty states ---- */
+.empty {
+  background: var(--white);
+  border: 1px dashed rgba(10, 55, 172, 0.35);
+  border-radius: var(--radius-m);
+  padding: clamp(1.8rem, 3vw, 2.6rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  align-items: flex-start;
+}
+
+.empty__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.empty__text {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: var(--ink-soft);
+  max-width: 54ch;
+}
+
+.empty__meta {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---- Status workflow (concerns / projects) ---- */
+.feat__list {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.feat__list li {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: 1.2rem;
+  align-items: baseline;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--stone);
+}
+
+.feat__list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.feat__list p {
+  margin: 0;
+}
+
+.flow {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+}
+
+.flow__step {
+  border: 1px solid var(--stone-2);
+  border-radius: var(--radius-s);
+  padding: 0.85rem 1rem;
+  background: var(--white);
+}
+
+.flow__step-n {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  color: var(--red);
+}
+
+.flow__step-t {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1000px) {
+  .tabon__features {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .tabon__features {
+    grid-template-columns: 1fr;
+  }
+  .tabon__card {
+    min-height: 0;
+  }
+  .feat__columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .flow {
+    grid-template-columns: 1fr 1fr;
+  }
+}

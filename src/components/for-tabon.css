@@ -1,0 +1,73 @@
+.tabon {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.tabon__head {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  align-items: end;
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+  border-bottom: 1px solid rgba(22, 26, 36, 0.14);
+  outline: none;
+}
+
+.tabon__head .eyebrow {
+  color: var(--red);
+}
+
+.tabon__title {
+  font-size: clamp(2rem, 4.6vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 1.5rem;
+  max-width: 16ch;
+}
+
+.tabon__title-em {
+  color: var(--blue);
+}
+
+.tabon__intro {
+  align-self: end;
+  padding-bottom: 0.35rem;
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.8;
+  color: var(--ink-soft);
+  max-width: 44ch;
+}
+
+/* ---- Cards as interactive elements ---- */
+.tabon__card--btn,
+.tabon__card--link {
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* ---- Pledge ---- */
+.tabon__pledge {
+  margin-top: clamp(3rem, 6vw, 4rem);
+  padding: 1.6rem 1.9rem;
+  background: var(--cream-2);
+  border: 1px solid rgba(22, 26, 36, 0.14);
+  border-radius: var(--radius-m);
+}
+
+.tabon__pledge-text {
+  font-size: 0.96rem;
+  line-height: 1.75;
+  color: var(--ink-2);
+  max-width: 64ch;
+}
+
+@media (max-width: 920px) {
+  .tabon__head {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .tabon__intro {
+    padding-bottom: 0;
+  }
+}

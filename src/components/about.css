@@ -1,0 +1,228 @@
+.about {
+  background: var(--white);
+  color: var(--ink);
+}
+
+.about__head {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+  border-bottom: 1px solid var(--stone);
+}
+
+.about__head .eyebrow {
+  color: var(--blue);
+}
+
+.about__title {
+  font-size: clamp(2rem, 4.6vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  max-width: 22ch;
+}
+
+.about__title-em {
+  color: var(--blue);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4.5fr) minmax(0, 7.5fr);
+  gap: clamp(2.5rem, 6vw, 6.5rem);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  align-items: start;
+}
+
+/* ---- Figure ---- */
+.about__figure {
+  position: sticky;
+  top: 6.5rem;
+}
+
+.about__frame {
+  display: grid;
+  place-items: center;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  background:
+    radial-gradient(
+      80% 80% at 20% 15%,
+      rgba(10, 55, 172, 0.08) 0%,
+      rgba(10, 55, 172, 0) 65%
+    ),
+    var(--blue-tint);
+  border: 1px solid rgba(10, 55, 172, 0.2);
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.about__frame::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), var(--red));
+}
+
+.about__logo {
+  width: min(78%, 20rem);
+  height: auto;
+}
+
+.about__figcap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--stone);
+}
+
+.about__mono {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* ---- Content ---- */
+.about__lead {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  max-width: 32ch;
+}
+
+.about__text {
+  margin-top: 1.5rem;
+  font-size: clamp(1rem, 1.15vw, 1.08rem);
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: 60ch;
+}
+
+.about__markers {
+  margin-top: 2.2rem;
+  border-top: 1px solid var(--stone);
+}
+
+/* ---- Chapters ---- */
+.about__chapters {
+  margin-top: 2.4rem;
+  border-top: 1px solid var(--stone);
+}
+
+.about__chapter {
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0, 1fr) auto;
+  gap: 1.4rem;
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--stone);
+  align-items: baseline;
+}
+
+.about__chapter-n {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--red);
+  padding-top: 0.2rem;
+}
+
+.about__chapter-title {
+  font-family: var(--font-display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.about__chapter-text {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  max-width: 56ch;
+}
+
+.about__chapter-state {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.about__principles {
+  margin-top: 2.6rem;
+}
+
+.about__principles-title {
+  font-family: var(--font-sans);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.about__principles-list {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.3rem;
+}
+
+.about__principles-list li {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr;
+  gap: 1.1rem;
+  align-items: baseline;
+}
+
+.about__principles-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--red);
+}
+
+.about__principles-list strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.about__principles-list p {
+  margin-top: 0.3rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 44ch;
+}
+
+@media (max-width: 920px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .about__figure {
+    position: static;
+    max-width: 24rem;
+  }
+  .about__chapter {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.9rem;
+  }
+  .about__chapter-state {
+    grid-column: 2;
+    margin-top: -0.3rem;
+  }
+}
