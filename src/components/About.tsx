@@ -51,13 +51,13 @@ export default function About() {
 
         <div className="about__grid">
           <Reveal variant="left" className="about__figure" delay={60}>
-            <div className="about__frame" role="img" aria-label="Edgar Corvera — identity mark">
+            <div className="about__frame" role="img" aria-label="Edgar Corvera — photograph">
               <img
                 className="about__logo"
-                src="/brand/logo.png"
+                src="/images/about.png"
                 alt=""
-                width={1983}
-                height={793}
+                width={1669}
+                height={942}
               />
             </div>
             <span className="about__figcap">

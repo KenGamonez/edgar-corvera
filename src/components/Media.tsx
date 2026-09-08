@@ -1,13 +1,13 @@
 import Reveal from "../lib/reveal";
 import "./media.css";
 
-const CATEGORIES = [
-  "Community",
-  "Public Service",
-  "Events",
-  "Activities",
-  "Press",
-  "Video",
+const SLOTS = [
+  { label: "Community", img: "/images/community.png" },
+  { label: "Public Service", img: "/images/public-service.png" },
+  { label: "Events", img: "/images/events.png" },
+  { label: "Activities", img: "/images/activities.png" },
+  { label: "Press", img: "/images/press.png" },
+  { label: "Video", img: "/images/video.png" },
 ];
 
 export default function Media() {
@@ -34,29 +34,40 @@ export default function Media() {
             <div
               className="media__featured-panel"
               role="img"
-              aria-label="Edgar Corvera identity mark"
+              aria-label="Edgar Corvera — visual record"
             >
               <img
-                className="media__featured-logo"
-                src="/brand/logo.png"
+                className="media__featured-img"
+                src="/images/featured.png"
                 alt=""
-                width={1983}
-                height={793}
+                width={1669}
+                height={942}
               />
             </div>
             <span className="media__featured-caption">
-              <span className="media__mono">Identity</span>
+              <span className="media__mono">Visual record</span>
               <span className="media__mono">Edgar Corvera — Barangay Tabon</span>
             </span>
           </Reveal>
 
           <div className="media__stack">
-            {CATEGORIES.map((cat, i) => (
-              <Reveal className="media__slot" key={cat} delay={70 + i * 50}>
-                <div className="media__slot-inner" role="img" aria-label={`${cat} — no media published`}>
-                  <span className="media__slot-label">{cat}</span>
+            {SLOTS.map((slot, i) => (
+              <Reveal className="media__slot" key={slot.label} delay={70 + i * 50}>
+                <div
+                  className="media__slot-inner"
+                  role="img"
+                  aria-label={`${slot.label} — Edgar Corvera record`}
+                >
+                  <img
+                    className="media__slot-img"
+                    src={slot.img}
+                    alt=""
+                    width={1669}
+                    height={942}
+                  />
+                  <span className="media__slot-label">{slot.label}</span>
                   <span className="media__slot-note">
-                    No media has been published yet.
+                    Edgar Corvera — Barangay Tabon
                   </span>
                 </div>
               </Reveal>

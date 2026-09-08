@@ -75,10 +75,10 @@ export default function Hero() {
             <div className="hero__panel-frame">
               <img
                 className="hero__logo"
-                src="/brand/logo.png"
+                src="/images/hero.png"
                 alt="Edgar Corvera"
-                width={1983}
-                height={793}
+                width={1669}
+                height={942}
               />
               <span className="hero__panel-line" />
               <p className="hero__panel-caption">

@@ -187,6 +187,7 @@
 .hero__logo {
   height: auto;
   width: min(100%, 20rem);
+  border-radius: 2px;
 }
 
 .hero__panel-line {

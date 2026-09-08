@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -10,6 +11,12 @@ import Footer from "./components/Footer";
 import "./styles/app.css";
 
 export default function App() {
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <>
       <Nav />

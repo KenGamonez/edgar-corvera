@@ -112,9 +112,9 @@ export default function ForTabon() {
 
   useEffect(() => {
     if (active) {
-      panelRef.current?.focus();
+      panelRef.current?.focus({ preventScroll: true });
     } else {
-      headRef.current?.focus();
+      headRef.current?.focus({ preventScroll: true });
     }
   }, [active]);
 
