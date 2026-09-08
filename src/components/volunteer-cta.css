@@ -1,0 +1,125 @@
+/* ============================================================
+   VOLUNTEER CTA — editorial band on the homepage.
+   Ivory surface, strong display, blue action, right panel with
+   functional details. No rounded SaaS card, no gradient.
+   ============================================================ */
+
+.volcta {
+  background: var(--ivory);
+  border-top: 1px solid var(--stone);
+  position: relative;
+}
+
+.volcta::before,
+.volcta::after {
+  content: "";
+  position: absolute;
+  width: var(--corner);
+  height: var(--corner);
+  border: 1px solid var(--stone-2);
+  opacity: 0.7;
+}
+
+.volcta::before {
+  top: var(--section);
+  left: var(--gutter);
+  border-right: none;
+  border-bottom: none;
+}
+
+.volcta::after {
+  bottom: var(--section);
+  right: var(--gutter);
+  border-left: none;
+  border-top: none;
+}
+
+.volcta__grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, 0.82fr);
+  gap: clamp(2.5rem, 5vw, 5.5rem);
+  align-items: center;
+}
+
+.volcta__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, clamp(2.4rem, 6.8vw, 4.4rem));
+  margin: 0.35rem 0 0.75rem;
+}
+
+.volcta__sub {
+  color: var(--ink-soft);
+  font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+  margin-bottom: 1.2rem;
+  max-width: 28rem;
+}
+
+.volcta__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: var(--blue);
+  color: #fff;
+  padding: 0.85rem 1.55rem;
+  border-radius: var(--radius-s);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.25s var(--ease-out), transform 0.25s var(--ease-out);
+}
+
+.volcta__btn:hover {
+  background: var(--blue-deep);
+  transform: translateY(-2px);
+}
+
+.volcta__meta-panel {
+  border-left: 1px solid var(--stone-2);
+  padding-left: clamp(1.4rem, 3vw, 3rem);
+}
+
+.volcta__meta {
+  display: grid;
+  gap: 0.75rem;
+  font-size: 0.88rem;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+
+.volcta__meta li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.volcta__meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.volcta__note {
+  margin-top: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  line-height: 1.65;
+  color: var(--ink-faint);
+}
+
+@media (max-width: 768px) {
+  .volcta__grid {
+    display: block;
+  }
+
+  .volcta__meta-panel {
+    border-left: none;
+    border-top: 1px solid var(--stone-2);
+    padding-left: 0;
+    padding-top: 1.6rem;
+    margin-top: 1.6rem;
+  }
+}

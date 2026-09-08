@@ -71,6 +71,9 @@ export default function Footer() {
                 <a href="#get-involved">Get involved</a>
               </li>
               <li>
+                <a href="/volunteer">Join the team</a>
+              </li>
+              <li>
                 <a href="#open-tabon">Open Tabon — transparency</a>
               </li>
             </ul>

@@ -12,6 +12,8 @@ const LINKS = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const onHome =
+    typeof window !== "undefined" && window.location.pathname === "/";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -49,7 +51,7 @@ export default function Nav() {
       className={`nav ${scrolled || open ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}
     >
       <div className="container nav__inner">
-        <a href="#top" className="nav__brand" onClick={() => setOpen(false)}>
+        <a href={onHome ? "#top" : "/"} className="nav__brand" onClick={() => setOpen(false)}>
           <img
             src="/brand/logo.png"
             alt="Edgar Corvera"
@@ -80,7 +82,7 @@ export default function Nav() {
               <li key={link.id}>
                 <a
                   className="nav__link"
-                  href={`#${link.id}`}
+                  href={onHome ? `#${link.id}` : `/#${link.id}`}
                   onClick={() => setOpen(false)}
                 >
                   <span className="nav__num">0{i + 1}</span>
@@ -89,6 +91,23 @@ export default function Nav() {
               </li>
             ))}
           </ul>
+
+          <div className="nav__cta">
+            <a
+              href="/volunteer"
+              className="nav__join"
+              onClick={() => setOpen(false)}
+            >
+              Join the team
+            </a>
+            <a
+              href="/admin/login"
+              className="nav__login"
+              onClick={() => setOpen(false)}
+            >
+              Team login
+            </a>
+          </div>
 
           <div className="nav__menu-foot">
             <span>Edgar Corvera</span>

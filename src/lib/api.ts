@@ -34,11 +34,28 @@ export type QuestionPayload = {
 
 export type SubscriptionPayload = { name: string; email: string };
 
+export type VolunteerPayload = {
+  fullName: string;
+  contact: string;
+  email: string;
+  area: string;
+  help: string;
+  skills: string;
+  availability: string;
+  preferredActivities: string;
+  message: string;
+  consent: boolean;
+};
+
 export type Submission =
   | ({ kind: "survey" } & SurveyPayload)
   | ({ kind: "concern" } & ConcernPayload)
   | ({ kind: "question" } & QuestionPayload)
-  | ({ kind: "subscription" } & SubscriptionPayload);
+  | ({ kind: "subscription" } & SubscriptionPayload)
+  | ({ kind: "volunteer" } & VolunteerPayload);
+
+/** A stored submission with its reference and timestamp. */
+export type StoredSubmission = Submission & { ref: string; submittedAt: string };
 
 export type SubmitResult =
   | { ok: true; ref: string }
@@ -69,9 +86,13 @@ function store(all: Submission[]) {
 
 function makeRef(kind: Submission["kind"]): string {
   const prefix =
-    { survey: "SURV", concern: "CONC", question: "ASK", subscription: "SUB" }[
-      kind
-    ] ?? "REC";
+    {
+      survey: "SURV",
+      concern: "CONC",
+      question: "ASK",
+      subscription: "SUB",
+      volunteer: "VOL",
+    }[kind] ?? "REC";
   const n = load().length + 1;
   const stamp = new Date()
     .toISOString()
@@ -116,3 +137,15 @@ export const submitSurvey = (p: SurveyPayload) => submit("survey", p);
 export const submitConcern = (p: ConcernPayload) => submit("concern", p);
 export const submitQuestion = (p: QuestionPayload) => submit("question", p);
 export const subscribe = (p: SubscriptionPayload) => submit("subscription", p);
+export const submitVolunteer = (p: VolunteerPayload) => submit("volunteer", p);
+
+/**
+ * Read the locally stored submissions. Used by the private operations
+ * dashboard. When a backend is connected this becomes a query such as
+ *   supabase.from("volunteers").select("*")
+ * Personal details are only reachable from the private layer; the public
+ * site never reads this list.
+ */
+export function listSubmissions(): StoredSubmission[] {
+  return load() as StoredSubmission[];
+}
