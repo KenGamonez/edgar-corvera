@@ -1,149 +1,202 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Button } from './Button'
 import { Logo } from './Logo'
+import { Sun } from './Sun'
 import { brand, about } from '../data/content'
 
 const ease = [0.22, 1, 0.36, 1] as const
+const SLIDE_MS = 6000
+
+type Slide = {
+  kicker: string
+  lines: string[]
+  accent: 'blue' | 'red'
+  body: string
+  buttons: { href: string; label: string; variant: 'red' | 'gold' }[]
+}
+
+const slides: Slide[] = [
+  {
+    kicker: brand.title,
+    lines: ['Edgar', 'Corvera'],
+    accent: 'red',
+    body: about.intro,
+    buttons: [
+      { href: '#about', label: 'Meet Edgar', variant: 'red' },
+      { href: '#for-tabon', label: 'Vision for Tabon', variant: 'gold' },
+    ],
+  },
+  {
+    kicker: `${brand.locationShort} · ${brand.city}`,
+    lines: ['Engineering.', 'Public Service.', 'Experience.'],
+    accent: 'blue',
+    body: 'Bringing technical discipline and community focus home to Barangay Tabon.',
+    buttons: [
+      { href: '#public-service', label: 'Public Service', variant: 'red' },
+      { href: '#updates', label: 'Updates', variant: 'gold' },
+    ],
+  },
+]
 
 export function Hero() {
   const reduce = useReducedMotion()
+  const [index, setIndex] = useState(0)
+
+  useEffect(() => {
+    if (reduce) return
+    const timer = setInterval(() => setIndex((i) => (i + 1) % slides.length), SLIDE_MS)
+    return () => clearInterval(timer)
+  }, [index, reduce])
+
+  const slide = slides[index]
 
   return (
-    <section
-      id="top"
-      className="relative grid min-h-svh overflow-hidden bg-black text-white lg:grid-cols-12"
-      aria-labelledby="hero-heading"
-    >
-      {/* Ambient oversized monogram backdrop */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-8 top-10 select-none font-display text-[24rem] font-extrabold leading-none tracking-tighter text-white/[0.04] sm:text-[34rem] lg:-right-4"
-      >
-        EC
-      </span>
-      {/* Red accent band */}
-      <div className="absolute inset-y-0 left-0 w-1.5 bg-red sm:w-2" aria-hidden="true" />
+    <section id="top" className="relative overflow-hidden" aria-label="Campaign banner">
+      <div className="relative h-[min(34rem,88vh)] min-h-[32rem] sm:h-[min(38rem,88vh)] lg:h-[min(40rem,90vh)]">
+        {/* Flag backdrop + white overlay (reference: photo + rgba white 0.7). */}
+        <div className="absolute inset-0" aria-hidden="true">
+          <div className="clip-red absolute inset-0 bg-red" />
+          <div className="clip-blue absolute inset-0 bg-blue" />
+        </div>
+        <div className="absolute inset-0 bg-white/70" aria-hidden="true" />
 
-      <div className="section-pad relative z-10 pt-28 sm:pt-32 lg:col-span-8 lg:flex lg:flex-col lg:justify-center lg:py-24">
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease }}
+        {/* Decorative oversized sun, corner EC monogram. */}
+        <Sun className="absolute -right-10 top-6 hidden h-64 w-64 opacity-20 md:block lg:-right-16 lg:h-80 lg:w-80" />
+        <span
+          aria-hidden="true"
+          className="absolute -bottom-16 left-6 hidden select-none font-display text-[18rem] uppercase leading-none text-navy/[0.06] lg:block"
         >
-          <p className="micro-label flex items-center gap-3 text-white/60">
-            <span className="inline-block h-[2px] w-10 bg-red" aria-hidden="true" />
-            {brand.election}
-          </p>
+          EC
+        </span>
 
-          <h1
-            id="hero-heading"
-            className="mt-8 font-display text-[clamp(3.75rem,13vw,10rem)] font-extrabold uppercase leading-[0.82] tracking-[0.004em] text-white"
+        {/* Slides */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={reduce ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={reduce ? undefined : { opacity: 0 }}
+            transition={{ duration: 0.7, ease }}
+            className="absolute inset-0"
           >
-            <motion.span
-              className="block"
-              initial={reduce ? false : { opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.08, ease }}
-            >
-              Edgar
-            </motion.span>
-            <motion.span
-              className="block"
-              initial={reduce ? false : { opacity: 0, x: -24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.18, ease }}
-            >
-              Corvera
-            </motion.span>
-          </h1>
-        </motion.div>
+            <div className="mx-auto flex h-full w-full max-w-[1280px] flex-col justify-center gap-10 px-4 py-16 sm:px-6 lg:px-8 lg:flex-row lg:items-center lg:gap-14">
+              <div className="flex-1 lg:pb-2">
+                <motion.p
+                  initial={reduce ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.15, ease }}
+                  className="micro-label flex items-center gap-2 text-navy"
+                >
+                  <span aria-hidden="true" className="text-gold">
+                    ★
+                  </span>
+                  {slide.kicker}
+                </motion.p>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3, ease }}
-          className="mt-6 inline-flex w-max max-w-full items-center gap-4 bg-red px-6 py-4 sm:px-8"
-        >
-          <span className="font-display text-[clamp(1.5rem,4vw,2.75rem)] font-bold uppercase leading-none tracking-[0.02em] text-white">
-            For Barangay Captain
-          </span>
-        </motion.div>
+                <h1 className="mt-4 font-display text-[clamp(3.4rem,11vw,7.5rem)] uppercase leading-[0.9] tracking-[0.01em] text-navy">
+                  {slide.lines.map((line, i) => (
+                    <motion.span
+                      key={line}
+                      className="block"
+                      initial={reduce ? false : { opacity: 0, y: 22 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.25 + i * 0.08, ease }}
+                    >
+                      <span
+                        className={
+                          slide.accent === 'red' && i === slide.lines.length - 1
+                            ? 'text-red'
+                            : undefined
+                        }
+                      >
+                        {line}
+                      </span>
+                    </motion.span>
+                  ))}
+                </h1>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease }}
-          className="mt-8 flex items-center gap-3"
-        >
-          <span className="micro-label text-white/50">{brand.location}</span>
-          <span className="h-px flex-1 bg-white/15" aria-hidden="true" />
-        </motion.div>
+                <motion.p
+                  initial={reduce ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5, ease }}
+                  className="mt-5 max-w-xl text-base leading-relaxed text-charcoal/80 sm:text-lg text-pretty"
+                >
+                  {slide.body}
+                </motion.p>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.5, ease }}
-          className="mt-6 max-w-xl text-base leading-relaxed text-white/65 sm:text-lg text-pretty"
-        >
-          {about.intro}
-        </motion.div>
+                <motion.div
+                  initial={reduce ? false : { opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.62, ease }}
+                  className="mt-8 flex flex-wrap gap-3"
+                >
+                  {slide.buttons.map((btn) => (
+                    <Button key={btn.href} href={btn.href} variant={btn.variant}>
+                      {btn.label}
+                    </Button>
+                  ))}
+                </motion.div>
+              </div>
 
-        <motion.div
-          initial={reduce ? false : { opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6, ease }}
-          className="mt-10 flex flex-wrap gap-3"
-        >
-          <Button href="#about" variant="primary">
-            Meet Edgar
-          </Button>
-          <Button href="#public-service" variant="outline-light">
-            Public Service Record
-          </Button>
-        </motion.div>
-      </div>
-
-      {/* Right identity panel */}
-      <motion.div
-        initial={reduce ? false : { opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.25, ease }}
-        className="relative z-10 flex flex-col justify-end border-t border-white/10 lg:col-span-4 lg:border-t-0 lg:border-l"
-      >
-        <div className="relative flex min-h-[16rem] flex-1 items-center justify-center overflow-hidden p-8 sm:min-h-[20rem] lg:min-h-0">
-          <Logo
-            size="hero"
-            alt="Edgar Corvera campaign logo"
-            className="mx-auto max-w-[19rem] sm:max-w-[22rem]"
-          />
-        </div>
-
-        <div className="border-t border-white/10 px-8 py-6 sm:px-10 sm:py-8">
-          <div className="grid grid-cols-2 gap-6">
-            <div>
-              <p className="micro-label text-white/40">Candidate</p>
-              <p className="mt-2 font-display text-xl font-bold uppercase tracking-tight text-white">
-                Edgar Corvera
-              </p>
+              {/* Banner label — the campaign mark on a white crest card. */}
+              <motion.div
+                initial={reduce ? false : { opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.7, delay: 0.3, ease }}
+                className="shrink-0 lg:max-w-md"
+              >
+                <div className="btn-shadow relative bg-white p-5 sm:p-7">
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-0 top-0 h-1.5 w-full bg-gold"
+                  />
+                  <Logo size="hero" alt="Edgar Corvera campaign logo" className="w-full" />
+                  <p className="micro-label mt-5 flex items-center justify-center gap-2 text-center text-charcoal/60">
+                    <span aria-hidden="true" className="text-red">
+                      ★
+                    </span>
+                    {brand.election}
+                  </p>
+                </div>
+              </motion.div>
             </div>
-            <div>
-              <p className="micro-label text-white/40">Location</p>
-              <p className="mt-2 font-display text-xl font-bold uppercase leading-tight tracking-tight text-white">
-                {brand.locationShort}
-                <br />
-                {brand.city}
-              </p>
-            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Controls */}
+        <div className="absolute bottom-4 left-4 z-20 flex items-center gap-3 sm:bottom-6 sm:left-6">
+          <button
+            type="button"
+            onClick={() => setIndex((index - 1 + slides.length) % slides.length)}
+            aria-label="Previous"
+            className="btn-shadow flex h-11 w-11 items-center justify-center bg-white font-display text-xl text-red transition-colors duration-300 hover:bg-red hover:text-white"
+          >
+            ‹
+          </button>
+          <button
+            type="button"
+            onClick={() => setIndex((index + 1) % slides.length)}
+            aria-label="Next"
+            className="btn-shadow flex h-11 w-11 items-center justify-center bg-white font-display text-xl text-red transition-colors duration-300 hover:bg-red hover:text-white"
+          >
+            ›
+          </button>
+          <div className="ml-2 flex items-center gap-2" role="tablist" aria-label="Slides">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                type="button"
+                role="tab"
+                aria-selected={i === index}
+                aria-label={`Slide ${i + 1}`}
+                onClick={() => setIndex(i)}
+                className={`h-2.5 w-2.5 rounded-full border border-navy/40 transition-colors duration-300 ${
+                  i === index ? 'bg-red' : 'bg-transparent'
+                }`}
+              />
+            ))}
           </div>
-        </div>
-      </motion.div>
-
-      {/* Bottom ticker strip */}
-      <div className="section-pad relative z-10 col-span-full border-t border-white/10">
-        <div className="container-site flex items-center gap-4 py-5">
-          <span className="micro-label text-white/40">{brand.locationShort} · {brand.city}</span>
-          <span className="h-px flex-1 bg-white/10" aria-hidden="true" />
-          <span className="micro-label text-red">{brand.election}</span>
         </div>
       </div>
     </section>

@@ -1,75 +1,98 @@
 import { Reveal } from './Reveal'
-import { about } from '../data/content'
+import { Button } from './Button'
+import { brand, about } from '../data/content'
 
 const facts = [
   { label: 'Education', value: about.education },
+  { label: 'Profession', value: about.profession },
   { label: 'Background', value: about.previousRole },
   { label: 'Public Service', value: about.publicService },
 ]
 
+const tiles = [
+  { href: '#public-service', label: 'Public Service', index: '01' },
+  { href: '#legislative', label: 'Legislative Record', index: '02' },
+  { href: '#for-tabon', label: 'For Tabon', index: '03' },
+]
+
 export function About() {
   return (
-    <section id="about" className="bg-white" aria-labelledby="about-heading">
+    <section id="about" className="bg-blue text-white" aria-labelledby="about-heading">
       <div className="section-pad">
-        <div className="container-site section-y grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-5">
-            <div className="relative aspect-[3/4] overflow-hidden bg-charcoal">
-              <span className="absolute left-0 top-0 h-1 w-16 bg-red" aria-hidden="true" />
-              <span className="absolute left-6 top-6 micro-label text-white/40">
-                Official profile
-              </span>
-              <span
-                className="absolute inset-0 flex items-center justify-center"
-                aria-hidden="true"
+        <div className="container-site section-y">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <Reveal>
+              <p className="micro-label flex items-center gap-2 text-gold">
+                <span aria-hidden="true">★</span>
+                {brand.election}
+              </p>
+              <h2
+                id="about-heading"
+                className="mt-4 font-display text-[clamp(3.2rem,9vw,7rem)] uppercase leading-[0.9] tracking-[0.01em] text-white"
               >
-                <span className="font-display text-[clamp(9rem,28vw,17rem)] font-extrabold uppercase leading-none tracking-tight text-white/10">
-                  EC
-                </span>
-              </span>
-              <div className="absolute inset-x-0 bottom-0 border-t border-white/10 p-6 sm:p-8">
-                <p className="micro-label text-red">Electrical Engineer</p>
-                <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white">
-                  Edgar Corvera
-                </p>
+                Barangay
+                <br />
+                Captain
+              </h2>
+              <p className="mt-6 text-base text-gold/90 sm:text-lg">
+                {brand.fullName} · {brand.location}
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.08}>
+              <p className="text-base leading-[1.7] text-white/90 sm:text-lg text-pretty">
+                {about.intro}
+              </p>
+
+              <ul className="mt-8 space-y-4">
+                {facts.map((fact) => (
+                  <li key={fact.label} className="flex items-baseline gap-4 border-b border-white/15 pb-3">
+                    <span className="micro-label w-40 shrink-0 text-gold">{fact.label}</span>
+                    <span className="font-medium text-white/90">{fact.value}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Button href="#public-service" variant="red">
+                  Read More
+                </Button>
+                <Button href="#for-tabon" variant="gold">
+                  Vision for Tabon
+                </Button>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
+        </div>
+      </div>
 
-          <Reveal delay={0.08} className="lg:col-span-7">
-            <p className="eyebrow micro-label mb-6 text-red">About Edgar</p>
-            <h2
-              id="about-heading"
-              className="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.005em] text-charcoal"
-            >
-              A leader
-              <br />
-              for Tabon.
-            </h2>
-            <p className="mt-8 max-w-2xl text-lg leading-relaxed text-charcoal/70 text-pretty">
-              {about.intro}
-            </p>
-
-            <dl className="mt-12 grid gap-0 border-t border-line sm:grid-cols-3">
-              {facts.map((fact, i) => (
-                <div
-                  key={fact.label}
-                  className={`border-b border-line py-7 sm:border-b-0 sm:py-8 ${
-                    i < facts.length - 1 ? 'sm:border-r sm:pr-6' : ''
-                  } ${i > 0 ? 'sm:pl-6' : ''}`}
-                >
-                  <dt className="micro-label text-charcoal/40">{fact.label}</dt>
-                  <dd className="mt-3 font-medium leading-relaxed text-charcoal/80">
-                    {fact.value}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-
-            <div className="mt-10 flex items-center gap-4">
-              <span className="red-bar" aria-hidden="true" />
-              <span className="micro-label text-charcoal/45">{about.profession}</span>
-            </div>
-          </Reveal>
+      {/* Link tiles — image graphic + navy title bar */}
+      <div className="section-pad pb-10 sm:pb-16">
+        <div className="container-site grid gap-6 md:grid-cols-3">
+          {tiles.map((tile) => (
+            <Reveal key={tile.href} delay={0.05}>
+              <a href={tile.href} className="group block">
+                <span className="relative block aspect-[4/3] overflow-hidden">
+                  <span aria-hidden="true" className="absolute inset-0 bg-red" />
+                  <span aria-hidden="true" className="clip-blue absolute inset-0 bg-blue" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute -left-4 -top-6 select-none font-display text-[8rem] uppercase leading-none text-white/15 transition-transform duration-500 group-hover:scale-110"
+                  >
+                    {tile.index}
+                  </span>
+                  <span className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+                    <span className="font-display text-[5rem] uppercase leading-none tracking-tight text-white/85 transition-colors duration-300 group-hover:text-gold">
+                      EC
+                    </span>
+                  </span>
+                </span>
+                <span className="block bg-navy text-center font-display text-xl uppercase tracking-wide text-white transition-colors duration-300 group-hover:bg-red sm:text-2xl">
+                  <span className="block py-5">{tile.label}</span>
+                </span>
+              </a>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
-type Variant = 'primary' | 'dark' | 'ghost' | 'outline-light'
+type Variant = 'red' | 'blue' | 'gold' | 'outline'
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: Variant
@@ -10,27 +10,26 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 }
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-red text-white hover:bg-red-deep active:bg-red-deep',
-  dark: 'bg-charcoal text-white hover:bg-black active:bg-black',
-  ghost:
-    'border border-line-strong text-charcoal hover:border-charcoal hover:bg-charcoal/[0.04] active:bg-charcoal/[0.07]',
-  'outline-light': 'border border-white/35 text-white hover:border-white hover:bg-white/10',
+  red: 'bg-red text-white hover:opacity-80 active:opacity-70',
+  blue: 'bg-blue text-white hover:opacity-80 active:opacity-70',
+  gold: 'bg-gold text-navy hover:opacity-85 active:opacity-70',
+  outline: 'border border-white/60 text-white hover:border-white hover:bg-white/10',
 }
 
 export function Button({
-  variant = 'primary',
+  variant = 'red',
   href,
   children,
   className = '',
   ...rest
 }: ButtonProps) {
-  const classes = `group inline-flex items-center justify-center gap-3 px-7 py-3.5 text-[0.72rem] font-bold uppercase leading-none tracking-[0.16em] transition-colors duration-300 ${variants[variant]} ${className}`
+  const classes = `btn-shadow group inline-flex items-center justify-center gap-3 px-7 py-3.5 font-display text-sm uppercase tracking-[0.12em] transition-all duration-300 ${variants[variant]} ${className}`
 
   const content = (
     <>
       <span>{children}</span>
       <span
-        className="inline-block opacity-70 transition-transform duration-300 group-hover:translate-x-1"
+        className="inline-block opacity-80 transition-transform duration-300 group-hover:translate-x-1"
         aria-hidden="true"
       >
         →

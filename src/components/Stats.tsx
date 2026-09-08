@@ -1,83 +1,60 @@
-import { motion, useReducedMotion } from 'framer-motion'
 import { Reveal } from './Reveal'
-import { SectionHeading } from './SectionHeading'
 import { elections, disclaimers } from '../data/content'
-
-function StatNumber({ value, label }: { value: string; label: string }) {
-  const reduced = useReducedMotion()
-
-  return (
-    <motion.div
-      initial={reduced ? false : { opacity: 0, y: 16 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <p className="font-display text-[clamp(2.75rem,5vw,4rem)] font-extrabold leading-none tracking-tight tabular text-charcoal">
-        {value}
-      </p>
-      <p className="micro-label mt-3 text-charcoal/40">{label}</p>
-    </motion.div>
-  )
-}
 
 export function Stats() {
   return (
-    <section id="elections" className="bg-paper" aria-labelledby="elections-heading">
+    <section id="stats" className="bg-navy text-white" aria-labelledby="stats-heading">
       <div className="section-pad">
         <div className="container-site section-y">
           <Reveal>
-            <SectionHeading
-              eyebrow="Electoral Record"
-              title={<span id="elections-heading">The numbers speak.</span>}
-              description="City council election results presented factually — wins and losses alike."
-            />
+            <p className="micro-label text-gold">Election Record</p>
+            <h2
+              id="stats-heading"
+              className="mt-3 font-display text-[clamp(2.5rem,7vw,4.5rem)] uppercase leading-[0.95] tracking-[0.01em] text-white"
+            >
+              Proven in the field.
+            </h2>
           </Reveal>
 
-          <div className="mt-16 grid gap-px bg-line lg:mt-20 lg:grid-cols-2">
-            {elections.map((race, i) => (
-              <Reveal key={race.year} delay={i * 0.1} className="h-full">
-                <article className="group flex h-full flex-col bg-paper p-8 transition-colors duration-300 hover:bg-white sm:p-12">
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="flex items-baseline gap-4">
-                      <span className="font-display text-6xl font-extrabold leading-none tracking-tight tabular text-charcoal sm:text-7xl">
-                        {race.year}
-                      </span>
-                      <span className="micro-label text-charcoal/40">{race.race}</span>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {elections.map((election) => (
+              <Reveal key={election.year} delay={0.05}>
+                <div
+                  className={`flex h-full flex-col justify-between gap-6 border-b-4 p-7 sm:p-9 ${
+                    election.won ? 'border-gold bg-blue/40' : 'border-red/60 bg-white/[0.04]'
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-6">
+                    <div>
+                      <p className="font-display text-7xl leading-none tabular text-gold sm:text-8xl">
+                        {election.votes}
+                      </p>
+                      <p className="micro-label mt-3 text-white/60">{election.votesLabel}</p>
                     </div>
-                    <span
-                      className={`micro-label px-3 py-2 ${
-                        race.won
-                          ? 'bg-red text-white'
-                          : 'border border-line-strong text-charcoal/55'
-                      }`}
-                    >
-                      {race.result}
+                    <span className="font-display text-4xl uppercase leading-none text-white/25">
+                      {election.year}
                     </span>
                   </div>
-
-                  <div className="mt-14 grid grid-cols-2 gap-8 border-t border-line pt-10">
-                    <StatNumber value={race.votes} label={race.votesLabel} />
-                    <div>
-                      <p className="font-display text-[clamp(1.5rem,3vw,2.25rem)] font-bold uppercase leading-tight text-charcoal">
-                        {race.secondary}
-                      </p>
-                      <p className="micro-label mt-3 text-charcoal/40">Standing</p>
-                    </div>
+                  <div>
+                    <p className="font-display text-2xl uppercase tracking-wide text-white sm:text-3xl">
+                      {election.race}
+                    </p>
+                    <p className="mt-2 text-sm text-white/70">{election.secondary}</p>
+                    <p
+                      className={`mt-4 inline-flex items-center gap-2 px-3 py-1.5 micro-label ${
+                        election.won ? 'bg-gold text-navy' : 'bg-red text-white'
+                      }`}
+                    >
+                      <span aria-hidden="true">★</span>
+                      {election.result}
+                    </p>
                   </div>
-
-                  <span
-                    className={`mt-auto block h-1 w-16 pt-8 ${
-                      race.won ? 'bg-red' : 'bg-charcoal/15'
-                    }`}
-                    aria-hidden="true"
-                  />
-                </article>
+                </div>
               </Reveal>
             ))}
           </div>
 
-          <p className="micro-label mt-8 text-charcoal/40">{disclaimers.elections}</p>
+          <p className="mt-8 max-w-xl text-sm text-white/40">{disclaimers.elections}</p>
         </div>
       </div>
     </section>

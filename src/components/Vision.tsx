@@ -1,49 +1,52 @@
 import { Reveal } from './Reveal'
+import { SectionHeading } from './SectionHeading'
+import { Sun } from './Sun'
 import { visionAreas } from '../data/content'
 
 export function Vision() {
   return (
-    <section id="for-tabon" className="bg-charcoal text-white" aria-labelledby="vision-heading">
-      <div className="section-pad">
-        <div className="container-site section-y">
-          <Reveal>
-            <p className="eyebrow micro-label mb-8 text-white/50">For Tabon</p>
-            <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-              <h2
-                id="vision-heading"
-                className="font-display text-[clamp(2.75rem,8vw,6.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.005em] text-white"
-              >
-                What Edgar
-                <br />
-                wants for Tabon.
-              </h2>
-              <p className="max-w-md text-lg leading-relaxed text-white/55 text-pretty">
-                Community priorities and areas of focus for Barangay Tabon — structured for
-                discussion and development.
-              </p>
-            </div>
-          </Reveal>
+    <section id="for-tabon" className="relative overflow-hidden bg-white" aria-labelledby="vision-heading">
+      {/* Decorative flag motif in the corner, like the reference's flag graphic. */}
+      <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 hidden opacity-60 lg:block">
+        <div className="relative h-72 w-72 rotate-45">
+          <span className="absolute inset-0 bg-blue" />
+          <span className="clip-red absolute inset-0 bg-red" />
+          <Sun className="absolute left-1/2 top-[38%] h-16 w-16 -translate-x-1/2 -translate-y-1/2" />
+        </div>
+      </div>
 
-          <ul className="mt-16 border-t border-white/10 sm:mt-20">
-            {visionAreas.map((area, i) => (
-              <Reveal key={area.number} delay={i * 0.04}>
-                <li className="group grid gap-3 border-b border-white/10 py-8 sm:grid-cols-12 sm:items-baseline sm:gap-8 sm:py-10">
-                  <span className="font-display text-lg font-extrabold leading-none tabular text-red sm:col-span-1">
-                    {area.number}
-                  </span>
-                  <div className="sm:col-span-5">
-                    <h3 className="font-display text-3xl font-bold uppercase leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-red sm:text-5xl">
-                      {area.title}
-                      {area.subtitle && <span className="block text-white/45">{area.subtitle}</span>}
-                    </h3>
+      <div className="section-pad relative">
+        <div className="container-site section-y">
+          <SectionHeading
+            title="Agenda for Tabon"
+            eyebrow="Vision & Platform"
+            center
+            description="Six priority areas that will guide the campaign and the work ahead for Barangay Tabon."
+          />
+
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {visionAreas.map((area) => (
+              <Reveal key={area.number} delay={0.04}>
+                <article className="tile-blue group flex h-full flex-col items-start gap-1 p-7 text-left transition-transform duration-300 hover:-translate-y-1 sm:p-8">
+                  <div className="flex w-full items-center justify-between">
+                    <span aria-hidden="true" className="text-2xl text-gold">
+                      ★
+                    </span>
+                    <span className="font-display text-4xl leading-none text-white/25">
+                      {area.number}
+                    </span>
                   </div>
-                  <p className="text-white/55 sm:col-span-6 sm:text-lg text-pretty">
+                  <h3 className="mt-4 font-display text-2xl leading-tight tracking-wide text-white sm:text-3xl">
+                    {area.title}
+                    {area.subtitle && <span className="block text-gold">{area.subtitle}</span>}
+                  </h3>
+                  <p className="mt-3 font-sans text-sm uppercase tracking-[0.08em] text-white/65">
                     {area.description}
                   </p>
-                </li>
+                </article>
               </Reveal>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </section>

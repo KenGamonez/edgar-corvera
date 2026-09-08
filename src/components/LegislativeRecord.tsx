@@ -1,60 +1,53 @@
 import { Reveal } from './Reveal'
+import { SectionHeading } from './SectionHeading'
 import { legislativeRecords, disclaimers } from '../data/content'
 
 export function LegislativeRecord() {
   return (
-    <section
-      id="legislative"
-      className="bg-paper"
-      aria-labelledby="legislative-heading"
-    >
+    <section id="legislative" className="bg-white" aria-labelledby="legislative-heading">
       <div className="section-pad">
-        <div className="container-site section-y grid gap-12 lg:grid-cols-12 lg:gap-16">
-          <Reveal className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start">
-            <p className="eyebrow micro-label mb-8 text-charcoal/55">Record</p>
-            <h2
-              id="legislative-heading"
-              className="font-display text-[clamp(2.75rem,6vw,5rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.005em] text-charcoal"
-            >
-              A record
-              <br />
-              of work.
-            </h2>
-            <p className="mt-6 max-w-sm text-charcoal/60">
-              Selected measures associated with Edgar&apos;s city council service — and the
-              committees behind the work.
-            </p>
-            <span className="red-bar mt-8 block" aria-hidden="true" />
-            <p className="micro-label mt-8 max-w-xs text-charcoal/40">{disclaimers.legislative}</p>
-          </Reveal>
+        <div className="container-site section-y">
+          <SectionHeading
+            title="Legislative Record"
+            eyebrow="Ordinances & Measures"
+            description="Selected measures sponsored and authored during service on the Bislig City Council."
+            rightLink={{ label: 'Read More', href: '#public-service' }}
+          />
 
-          <div className="lg:col-span-8">
-            <ul>
-              {legislativeRecords.map((item, i) => (
-                <Reveal key={item.number} delay={i * 0.05}>
-                  <li className="group grid gap-3 border-t border-line py-8 last:border-b sm:grid-cols-[5rem_1fr_auto] sm:gap-8 sm:py-10">
-                    <span className="font-display text-4xl font-extrabold leading-none tabular text-charcoal/15 transition-colors duration-300 group-hover:text-red">
-                      {item.number}
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {legislativeRecords.map((record) => (
+              <Reveal key={record.number} delay={0.05}>
+                <article className="card-white group flex h-full flex-col border-t-4 border-red">
+                  <div className="flex items-center justify-between gap-4 p-6 pb-4">
+                    <span className="flex h-14 w-14 shrink-0 items-center justify-center bg-red font-display text-2xl text-white">
+                      {record.number}
                     </span>
-                    <div>
-                      <h3 className="font-display text-2xl font-bold uppercase tracking-tight text-charcoal sm:text-3xl">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-sm text-charcoal/50">
-                        {item.reference ?? 'City Council measure'}
+                    <div className="text-right">
+                      {record.reference ? (
+                        <p className="micro-label text-blue">{record.reference}</p>
+                      ) : (
+                        <p className="micro-label text-charcoal/40">City Ordinance</p>
+                      )}
+                      <p className="mt-1 font-display text-sm uppercase tracking-widest text-charcoal/60">
+                        {record.year}
                       </p>
                     </div>
-                    <div className="sm:text-right">
-                      <p className="micro-label text-charcoal/45">{item.year}</p>
-                      <p className="mt-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-red">
-                        {item.role}
-                      </p>
-                    </div>
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
+                  </div>
+                  <div className="flex flex-1 flex-col p-6 pt-0">
+                    <h3 className="font-display text-2xl uppercase leading-tight tracking-wide text-navy sm:text-3xl">
+                      {record.title}
+                    </h3>
+                    <span className="mt-4 inline-flex w-max items-center gap-2 bg-gold px-3 py-1.5 micro-label text-navy">
+                      <span aria-hidden="true">★</span>
+                      {record.role}
+                    </span>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
           </div>
+
+          <p className="mt-8 max-w-xl text-sm text-charcoal/50">{disclaimers.legislative}</p>
         </div>
       </div>
     </section>

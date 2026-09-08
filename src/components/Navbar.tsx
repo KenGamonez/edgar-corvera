@@ -1,6 +1,6 @@
 ﻿import { useEffect, useRef } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { Logo } from './Logo'
+import { Sun } from './Sun'
 import { navLinks, brand } from '../data/content'
 import { useActiveSection, useScrolled } from '../hooks/useUi'
 
@@ -10,9 +10,11 @@ type NavbarProps = {
 }
 
 const SECTION_IDS = ['about', 'public-service', 'for-tabon', 'updates', 'media', 'connect'] as const
+const LEFT_LINKS = ['about', 'public-service', 'for-tabon'] as const
+const RIGHT_LINKS = ['updates', 'media', 'connect'] as const
 
 export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
-  const scrolled = useScrolled(14)
+  const scrolled = useScrolled(10)
   const reduced = useReducedMotion()
   const active = useActiveSection(SECTION_IDS)
   const toggleRef = useRef<HTMLButtonElement>(null)
@@ -38,66 +40,45 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
     toggleRef.current?.focus()
   }, [menuOpen])
 
-  const solid = scrolled || menuOpen
+  const linkClass = (id: string) =>
+    `group inline-flex items-center gap-2 micro-label text-white transition-colors duration-300 hover:text-white ${
+      active === id ? 'text-white' : 'text-white/85'
+    }`
 
-  return (
-    <header
-      className={`fixed inset-x-0 top-0 z-[60] border-b transition-[background-color,border-color,box-shadow] duration-300 ${
-        solid
-          ? 'border-line bg-white shadow-[0_1px_0_rgba(22,24,28,0.05),0_12px_32px_rgba(22,24,28,0.06)]'
-          : 'border-transparent bg-transparent'
+  const star = (id: string) => (
+    <span
+      aria-hidden="true"
+      className={`text-[0.8em] text-gold transition-opacity duration-300 ${
+        active === id ? 'opacity-100' : 'opacity-40 group-hover:opacity-100'
       }`}
     >
-      <div className="section-pad">
-        <div className="container-site flex h-16 items-center gap-4 sm:h-20 lg:gap-8">
-          {/* Logo slot — flexes (min-w-0) so an image-loading change in logo width can never push the controls. */}
-          <a
-            href="#top"
-            aria-label="Edgar Corvera — home"
-            className="flex min-w-0 flex-1 items-center lg:flex-none"
-          >
-            <Logo
-              size="sm"
-              variant={solid ? 'raw' : 'tile'}
-              className="h-12 w-auto lg:h-14"
-            />
-          </a>
+      ★
+    </span>
+  )
 
-          {/* Desktop navigation — text toggles charcoal (solid) / white (over dark hero). */}
-          <nav
-            aria-label="Primary"
-            className="hidden items-center gap-8 lg:ml-auto lg:flex"
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.id}
-                href={link.href}
-                className={`nav-link micro-label transition-colors duration-300 ${
-                  active === link.id
-                    ? 'text-red'
-                    : solid
-                      ? 'text-charcoal/70 hover:text-charcoal'
-                      : 'text-white/75 hover:text-white'
-                }`}
-                data-active={active === link.id ? 'true' : 'false'}
-                aria-current={active === link.id ? 'true' : undefined}
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+  return (
+    <header className="fixed inset-x-0 top-0 z-[80]">
+      {/* Flag bar — red base with blue diagonal split */}
+      <div
+        className={`relative overflow-hidden bg-red shadow-[0_5px_11px_rgba(0,0,0,0.18),0_4px_15px_rgba(0,0,0,0.15)] transition-[height] duration-300 ${
+          scrolled && !menuOpen ? 'h-[60px] sm:h-16' : 'h-16 sm:h-20'
+        }`}
+      >
+        <span aria-hidden="true" className="clip-blue absolute inset-0 bg-blue" />
+        <span aria-hidden="true" className="clip-red absolute inset-0 bg-red" />
 
-          {/* Actions slot — shrink-0, fixed size, cannot be displaced. */}
-          <div className="flex shrink-0 items-center gap-3">
-            <a
-              href="#connect"
-              className={`micro-label hidden items-center px-5 py-3 transition-colors duration-300 md:inline-flex ${
-                solid ? 'bg-red text-white hover:bg-red-deep' : 'bg-red text-white hover:bg-red-deep'
-              }`}
-            >
-              Connect
-            </a>
+        {/* Center crest — fixed size, absolutely centered, cannot be displaced. */}
+        <a
+          href="#top"
+          aria-label="Edgar Corvera — home"
+          className="absolute left-1/2 top-1/2 z-20 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center sm:h-14 sm:w-14"
+        >
+          <Sun className="h-full w-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.25)]" />
+        </a>
 
+        <div className="relative z-10 mx-auto flex h-full w-full max-w-[1280px] items-center justify-between gap-3 px-4 sm:px-6 sm:gap-0">
+          {/* Left — mobile hamburger + desktop left links (flex, shrink-0) */}
+          <div className="flex shrink-0 items-center">
             <button
               ref={toggleRef}
               type="button"
@@ -105,78 +86,87 @@ export function Navbar({ menuOpen, onToggleMenu }: NavbarProps) {
               aria-label={menuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-              className={`flex h-12 w-12 shrink-0 items-center justify-center ${
-                solid ? 'text-charcoal' : 'text-white'
-              } lg:hidden`}
+              className="flex h-11 w-11 shrink-0 items-center justify-center text-3xl leading-none text-white lg:hidden"
             >
               <span className="sr-only">{menuOpen ? 'Close menu' : 'Open menu'}</span>
-              <span className="relative block h-4 w-7" aria-hidden="true">
-                <span
-                  className={`absolute left-0 block h-[2px] w-full bg-current transition-all duration-300 ${
-                    menuOpen ? 'top-[7px] rotate-45' : 'top-0'
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 top-[7px] block h-[2px] w-full bg-current transition-all duration-300 ${
-                    menuOpen ? 'opacity-0' : 'opacity-100'
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 block h-[2px] w-full bg-current transition-all duration-300 ${
-                    menuOpen ? 'top-[7px] -rotate-45' : 'top-[14px]'
-                  }`}
-                />
-              </span>
+              {menuOpen ? <span aria-hidden="true">×</span> : <span aria-hidden="true">☰</span>}
             </button>
+
+            <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+              {LEFT_LINKS.map((id) => {
+                const link = navLinks.find((l) => l.id === id)!
+                return (
+                  <a key={id} href={link.href} className={linkClass(id)}>
+                    {star(id)}
+                    {link.label}
+                  </a>
+                )
+              })}
+            </nav>
+          </div>
+
+          {/* Spacer keeps the absolutely-centered crest truly centered. */}
+          <div className="hidden lg:block" aria-hidden="true" />
+
+          {/* Right — desktop links + connect pill (shrink-0) */}
+          <div className="flex shrink-0 items-center gap-7">
+            <nav aria-label="Primary right" className="hidden items-center gap-7 lg:flex">
+              {RIGHT_LINKS.map((id) => {
+                const link = navLinks.find((l) => l.id === id)!
+                return (
+                  <a key={id} href={link.href} className={linkClass(id)}>
+                    {star(id)}
+                    {link.label}
+                  </a>
+                )
+              })}
+            </nav>
+            <a
+              href="#connect"
+              className="micro-label btn-shadow inline-flex items-center bg-navy px-4 py-2.5 text-gold transition-opacity duration-300 hover:opacity-80 sm:px-5"
+            >
+              {brand.election}
+            </a>
           </div>
         </div>
       </div>
 
-      {/* Mobile menu panel — solid white, below the fixed header, below it in z-order. */}
+      {/* Mobile off-canvas menu — navy panel sliding from the left. */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             id="mobile-menu"
-            className="fixed inset-x-0 bottom-0 top-16 z-[50] overflow-y-auto bg-white sm:top-20 lg:hidden"
-            initial={reduced ? false : { opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduced ? undefined : { opacity: 0, y: -6 }}
-            transition={{ duration: 0.22, ease: 'easeOut' }}
+            className="fixed inset-0 bottom-0 top-16 z-[60] overflow-y-auto bg-navy text-white sm:top-20 lg:hidden"
+            initial={reduced ? false : { x: '-100%' }}
+            animate={{ x: 0 }}
+            exit={reduced ? undefined : { x: '-100%' }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="flex min-h-full flex-col px-6 pb-12 pt-2 sm:px-10">
-              <nav aria-label="Mobile" className="border-t border-line">
+            <div className="flex min-h-full flex-col px-6 pb-12 pt-6 sm:px-10">
+              <nav aria-label="Mobile" className="flex-1">
                 <ul>
                   {navLinks.map((link, i) => (
-                    <li key={link.id}>
+                    <li key={link.id} className="border-b border-white/15">
                       <a
                         href={link.href}
                         onClick={onToggleMenu}
                         aria-current={active === link.id ? 'true' : undefined}
-                        className={`flex items-center justify-between gap-6 border-b border-line py-5 transition-colors duration-300 ${
-                          active === link.id ? 'text-red' : 'text-charcoal hover:text-red'
-                        }`}
+                        className="flex items-center gap-4 py-5 font-display text-3xl uppercase tracking-wide transition-colors duration-300 hover:text-gold"
                       >
-                        <span className="font-display text-3xl font-bold uppercase tracking-tight sm:text-4xl">
-                          {link.label}
+                        <span aria-hidden="true" className="text-gold">
+                          »
                         </span>
-                        <span className="micro-label text-charcoal/35">0{i + 1}</span>
+                        {link.label}
+                        <span className="ml-auto micro-label text-white/35">0{i + 1}</span>
                       </a>
                     </li>
                   ))}
                 </ul>
               </nav>
 
-              <div className="mt-10">
-                <a
-                  href="#connect"
-                  onClick={onToggleMenu}
-                  className="micro-label flex w-full items-center justify-center bg-red px-6 py-4 text-white transition-colors hover:bg-red-deep"
-                >
-                  Connect
-                </a>
-                <p className="mt-6 text-sm text-charcoal/45">
-                  {brand.title} — {brand.location}
-                </p>
+              <div className="mt-10 border-t border-white/15 pt-8">
+                <p className="micro-label text-gold">{brand.election}</p>
+                <p className="mt-3 text-sm text-white/50">{brand.location}</p>
               </div>
             </div>
           </motion.div>

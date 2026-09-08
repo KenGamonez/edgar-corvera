@@ -1,43 +1,40 @@
 import { Reveal } from './Reveal'
+import { SectionHeading } from './SectionHeading'
 import { committees } from '../data/content'
 
 export function CommitteeExperience() {
   return (
-    <section id="committees" className="bg-white" aria-labelledby="committees-heading">
+    <section id="committees" className="bg-paper" aria-labelledby="committees-heading">
       <div className="section-pad">
         <div className="container-site section-y">
-          <Reveal className="max-w-3xl">
-            <p className="eyebrow micro-label mb-8 text-charcoal/55">Areas of Public Service</p>
-            <h2
-              id="committees-heading"
-              className="font-display text-[clamp(2.75rem,7vw,5.5rem)] font-extrabold uppercase leading-[0.86] tracking-[-0.005em] text-charcoal"
-            >
-              Broad
-              <br />
-              experience.
-            </h2>
-          </Reveal>
+          <SectionHeading
+            title="Committee Experience"
+            eyebrow="Council Committees"
+            description="Areas of committee work where engineering discipline meets city governance."
+          />
 
-          <div className="mt-16 grid gap-px bg-line lg:mt-20 lg:grid-cols-2">
-            {committees.map((item, i) => (
-              <Reveal key={item.title} delay={0.08 + i * 0.1} className="h-full">
-                <article className="group flex h-full flex-col bg-white p-8 transition-colors duration-300 hover:bg-paper sm:p-12 lg:p-14">
-                  <div className="flex items-center justify-between">
-                    <span className="font-display text-6xl font-extrabold leading-none tabular text-charcoal/10 transition-colors duration-300 group-hover:text-red sm:text-7xl">
-                      0{i + 1}
-                    </span>
-                    <span className="micro-label text-charcoal/35">Committee</span>
-                  </div>
-                  <h3 className="mt-14 font-display text-4xl font-extrabold uppercase leading-[0.95] tracking-tight text-charcoal sm:text-5xl">
-                    {item.title}
-                    <span className="block text-red">{item.subtitle}</span>
+          <div className="mt-12 grid gap-6 md:grid-cols-2">
+            {committees.map((committee, i) => (
+              <Reveal key={committee.title} delay={0.05}>
+                <article className="card-white group relative h-full overflow-hidden border-t-8 border-blue p-7 sm:p-9">
+                  <span
+                    aria-hidden="true"
+                    className="absolute -right-2 -top-8 select-none font-display text-[8rem] uppercase leading-none text-blue/10 transition-colors duration-300 group-hover:text-red/15"
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <span aria-hidden="true" className="text-2xl text-gold">
+                    ★
+                  </span>
+                  <h3 className="mt-5 font-display text-3xl uppercase leading-none tracking-wide text-navy sm:text-4xl">
+                    {committee.title}
+                    {committee.subtitle && (
+                      <span className="block text-red">{committee.subtitle}</span>
+                    )}
                   </h3>
-                  <p className="mt-6 max-w-md text-lg leading-relaxed text-charcoal/65 text-pretty">
-                    {item.description}
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-charcoal/70 text-pretty">
+                    {committee.description}
                   </p>
-                  <div className="mt-auto pt-12">
-                    <span className="red-bar" aria-hidden="true" />
-                  </div>
                 </article>
               </Reveal>
             ))}

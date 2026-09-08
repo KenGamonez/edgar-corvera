@@ -3,46 +3,51 @@ import { SectionHeading } from './SectionHeading'
 import { updates } from '../data/content'
 
 export function Updates() {
-  const latest = updates[0]
-
   return (
-    <section id="updates" className="bg-paper" aria-labelledby="updates-heading">
+    <section id="updates" className="bg-blue text-white" aria-labelledby="updates-heading">
       <div className="section-pad">
         <div className="container-site section-y">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Newsroom"
-              title={<span id="updates-heading">Campaign updates.</span>}
-              description="Verified campaign activities and community updates are published here as the campaign takes shape."
-            />
-          </Reveal>
+          <SectionHeading
+            title="Latest Updates"
+            eyebrow="Campaign Newsroom"
+            tone="white"
+            description="Verified campaign activities and community updates as they are published."
+            rightLink={{ label: 'Media', href: '#media' }}
+          />
 
-          {latest && (
-            <Reveal className="mt-16 lg:mt-20">
-              <article className="relative overflow-hidden border border-line bg-white">
-                <span
-                  className="pointer-events-none absolute -top-2 right-6 font-display text-[7rem] font-extrabold leading-none tabular text-charcoal/[0.04] select-none sm:text-[11rem]"
-                  aria-hidden="true"
-                >
-                  01
-                </span>
-                <div className="relative p-8 sm:p-14">
-                  <div className="flex flex-wrap items-center justify-between gap-4">
-                    <span className="micro-label bg-red px-3 py-2 text-white">{latest.tag}</span>
-                    <span className="micro-label text-charcoal/40">{latest.date}</span>
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {updates.map((item) => (
+              <Reveal key={item.id} className="md:col-span-2 lg:col-span-1">
+                <article className="card-white group flex h-full flex-col text-charcoal">
+                  <div className="relative flex aspect-[7/4] items-center justify-center overflow-hidden bg-linear-to-br from-blue to-navy">
+                    <span
+                      aria-hidden="true"
+                      className="absolute -right-3 -bottom-6 select-none font-display text-[7rem] uppercase leading-none text-white/10"
+                    >
+                      EC
+                    </span>
+                    <span aria-hidden="true" className="text-4xl text-gold">
+                      ★
+                    </span>
                   </div>
-                  <p className="micro-label mt-12 text-charcoal/45">{latest.category}</p>
-                  <h3 className="mt-3 font-display text-4xl font-bold uppercase tracking-tight text-charcoal sm:text-5xl">
-                    {latest.title}
-                  </h3>
-                  <p className="mt-5 max-w-2xl text-base leading-relaxed text-charcoal/60 sm:text-lg text-pretty">
-                    {latest.excerpt}
-                  </p>
-                  <span className="red-bar mt-10 block" aria-hidden="true" />
-                </div>
-              </article>
-            </Reveal>
-          )}
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="micro-label inline-flex items-center gap-2 bg-gold px-2.5 py-1 text-navy">
+                        <span aria-hidden="true">★</span>
+                        {item.tag}
+                      </span>
+                      <span className="micro-label text-charcoal/45">{item.date}</span>
+                    </div>
+                    <h3 className="mt-4 font-display text-2xl uppercase leading-tight tracking-wide text-navy">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-charcoal/70">{item.excerpt}</p>
+                    <p className="mt-auto pt-5 micro-label text-blue">{item.category}</p>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
