@@ -145,6 +145,18 @@
   font-weight: 500;
 }
 
+/* ---- Header actions (mobile lang beside hamburger) ---- */
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 0 0 auto;
+}
+
+.nav__header-lang {
+  display: none;
+}
+
 /* ---- Mobile ---- */
 .nav__toggle {
   display: none;
@@ -288,6 +300,14 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--ink-faint);
+  }
+
+  .nav__header-lang {
+    display: inline-flex;
+  }
+
+  .nav__cta-lang {
+    display: none;
   }
 
   .nav--scrolled {

@@ -76,18 +76,23 @@ export default function Nav() {
           />
         </a>
 
-        <button
-          className="nav__toggle"
-          aria-expanded={open}
-          aria-controls="nav-menu"
-          onClick={() => setOpen((s) => !s)}
-        >
-          <span className="nav__toggle-line" />
-          <span className="nav__toggle-line" />
-          <span className="visually-hidden">
-            {open ? t.a11y.closeMenu : t.a11y.openMenu}
-          </span>
-        </button>
+        <div className="nav__actions">
+          <div className="nav__header-lang">
+            <LanguageToggle />
+          </div>
+          <button
+            className="nav__toggle"
+            aria-expanded={open}
+            aria-controls="nav-menu"
+            onClick={() => setOpen((s) => !s)}
+          >
+            <span className="nav__toggle-line" />
+            <span className="nav__toggle-line" />
+            <span className="visually-hidden">
+              {open ? t.a11y.closeMenu : t.a11y.openMenu}
+            </span>
+          </button>
+        </div>
 
         <nav
           id="nav-menu"
@@ -110,7 +115,9 @@ export default function Nav() {
           </ul>
 
           <div className="nav__cta">
-            <LanguageToggle />
+            <div className="nav__cta-lang">
+              <LanguageToggle />
+            </div>
             <a
               href="/volunteer"
               className="nav__join"
