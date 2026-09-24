@@ -1,19 +1,31 @@
 import { useEffect, useState } from "react";
+import { useLang } from "../i18n/LanguageContext";
+import LanguageToggle from "./LanguageToggle";
 import "./nav.css";
 
-const LINKS = [
-  { id: "about", label: "About" },
-  { id: "public-service", label: "Public Service" },
-  { id: "for-tabon", label: "For Tabon" },
-  { id: "updates", label: "Updates" },
-  { id: "media", label: "Media" },
-];
+const LINK_IDS = [
+  "about",
+  "public-service",
+  "for-tabon",
+  "updates",
+  "media",
+] as const;
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { t } = useLang();
   const onHome =
     typeof window !== "undefined" && window.location.pathname === "/";
+
+  const linkLabels: Record<(typeof LINK_IDS)[number], string> = {
+    about: t.nav.about,
+    "public-service": t.nav.publicService,
+    "for-tabon": t.nav.forTabon,
+    updates: t.nav.updates,
+    media: t.nav.media,
+  };
+  const links = LINK_IDS.map((id) => ({ id, label: linkLabels[id] }));
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -50,6 +62,9 @@ export default function Nav() {
     <header
       className={`nav ${scrolled || open ? "nav--scrolled" : ""} ${open ? "nav--open" : ""}`}
     >
+      <a className="nav__skip" href="#main">
+        {t.a11y.skipToContent}
+      </a>
       <div className="container nav__inner">
         <a href={onHome ? "#top" : "/"} className="nav__brand" onClick={() => setOpen(false)}>
           <img
@@ -69,16 +84,18 @@ export default function Nav() {
         >
           <span className="nav__toggle-line" />
           <span className="nav__toggle-line" />
-          <span className="visually-hidden">{open ? "Close menu" : "Open menu"}</span>
+          <span className="visually-hidden">
+            {open ? t.a11y.closeMenu : t.a11y.openMenu}
+          </span>
         </button>
 
         <nav
           id="nav-menu"
           className={`nav__menu ${open ? "nav__menu--open" : ""}`}
-          aria-label="Primary"
+          aria-label={t.a11y.primaryNav}
         >
           <ul className="nav__links">
-            {LINKS.map((link, i) => (
+            {links.map((link, i) => (
               <li key={link.id}>
                 <a
                   className="nav__link"
@@ -93,19 +110,20 @@ export default function Nav() {
           </ul>
 
           <div className="nav__cta">
+            <LanguageToggle />
             <a
               href="/volunteer"
               className="nav__join"
               onClick={() => setOpen(false)}
             >
-              Join the team
+              {t.nav.joinTeam}
             </a>
             <a
               href="/admin/login"
               className="nav__login"
               onClick={() => setOpen(false)}
             >
-              Team login
+              {t.nav.teamLogin}
             </a>
           </div>
 

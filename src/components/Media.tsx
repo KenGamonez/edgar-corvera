@@ -1,31 +1,33 @@
 import Reveal from "../lib/reveal";
+import { useLang } from "../i18n/LanguageContext";
 import "./media.css";
 
-const SLOTS = [
-  { label: "Community", img: "/images/community.png" },
-  { label: "Public Service", img: "/images/public-service.png" },
-  { label: "Events", img: "/images/events.png" },
-  { label: "Activities", img: "/images/activities.png" },
-  { label: "Press", img: "/images/press.png" },
-  { label: "Video", img: "/images/video.png" },
+/** Image assets are invariant; slot labels translate. */
+const SLOT_IMGS = [
+  "/images/community.png",
+  "/images/public-service.png",
+  "/images/events.png",
+  "/images/activities.png",
+  "/images/press.png",
+  "/images/video.png",
 ];
 
 export default function Media() {
+  const { t } = useLang();
   return (
     <section className="media section" id="media" aria-labelledby="media-title">
       <div className="container">
         <div className="media__head">
           <div>
             <p className="eyebrow" data-reveal>
-              Media
+              {t.media.eyebrow}
             </p>
             <h2 className="media__title" id="media-title" data-reveal>
-              A visual record of public service.
+              {t.media.title}
             </h2>
           </div>
           <Reveal as="p" className="media__note" delay={120}>
-            Photography, video, and press coverage will be published here as
-            they are produced. Nothing is labelled before it exists.
+            {t.media.note}
           </Reveal>
         </div>
 
@@ -34,7 +36,7 @@ export default function Media() {
             <div
               className="media__featured-panel"
               role="img"
-              aria-label="Edgar Corvera — visual record"
+              aria-label={t.media.featuredAria}
             >
               <img
                 className="media__featured-img"
@@ -45,27 +47,27 @@ export default function Media() {
               />
             </div>
             <span className="media__featured-caption">
-              <span className="media__mono">Visual record</span>
+              <span className="media__mono">{t.media.featuredCaption}</span>
               <span className="media__mono">Edgar Corvera — Barangay Tabon</span>
             </span>
           </Reveal>
 
           <div className="media__stack">
-            {SLOTS.map((slot, i) => (
-              <Reveal className="media__slot" key={slot.label} delay={70 + i * 50}>
+            {t.mediaSlots.map((label, i) => (
+              <Reveal className="media__slot" key={SLOT_IMGS[i]} delay={70 + i * 50}>
                 <div
                   className="media__slot-inner"
                   role="img"
-                  aria-label={`${slot.label} — Edgar Corvera record`}
+                  aria-label={`${label} — ${t.media.recordSuffix}`}
                 >
                   <img
                     className="media__slot-img"
-                    src={slot.img}
+                    src={SLOT_IMGS[i]}
                     alt=""
                     width={1669}
                     height={942}
                   />
-                  <span className="media__slot-label">{slot.label}</span>
+                  <span className="media__slot-label">{label}</span>
                   <span className="media__slot-note">
                     Edgar Corvera — Barangay Tabon
                   </span>
@@ -76,12 +78,9 @@ export default function Media() {
         </div>
 
         <Reveal className="media__strip" delay={120}>
-          <span className="media__strip-label">Press &amp; coverage</span>
-          <p className="media__strip-text">
-            Press releases and coverage will be archived here, with links to
-            their original sources, as they are published.
-          </p>
-          <span className="media__strip-state">Nothing published yet</span>
+          <span className="media__strip-label">{t.media.stripLabel}</span>
+          <p className="media__strip-text">{t.media.stripText}</p>
+          <span className="media__strip-state">{t.media.stripState}</span>
         </Reveal>
       </div>
     </section>

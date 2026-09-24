@@ -13,14 +13,23 @@ import Footer from "./components/Footer";
 import Volunteer from "./components/Volunteer";
 import DigitalCampaign from "./components/DigitalCampaign";
 import { AuthProvider } from "./admin/AuthContext";
+import { useLang } from "./i18n/LanguageContext";
 import AdminApp from "./admin/AdminApp";
 import "./styles/app.css";
+
+function RouteMetaSync({ path }: { path: string }) {
+  const { syncRouteMeta } = useLang();
+  useEffect(() => {
+    syncRouteMeta(path);
+  }, [path, syncRouteMeta]);
+  return null;
+}
 
 function PublicSite() {
   return (
     <>
       <Nav />
-      <main>
+      <main id="main">
         <Hero />
         <About />
         <PublicService />
@@ -97,6 +106,7 @@ export default function App() {
 
   return (
     <AuthProvider>
+      <RouteMetaSync path={path} />
       <PageRouter path={path} />
     </AuthProvider>
   );

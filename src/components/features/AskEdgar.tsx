@@ -1,9 +1,11 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import { submitQuestion } from "../../lib/api";
+import { useLang } from "../../i18n/LanguageContext";
 import "./features.css";
 
 export default function AskEdgar() {
+  const { t } = useLang();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [message, setMessage] = useState("");
@@ -14,15 +16,15 @@ export default function AskEdgar() {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!name.trim()) {
-      setError("Please share your name so the message can be addressed.");
+      setError(t.featAsk.errName);
       return;
     }
     if (!contact.trim()) {
-      setError("Please add a way to reach you for a reply.");
+      setError(t.featAsk.errContact);
       return;
     }
     if (!message.trim()) {
-      setError("Please write your question or message.");
+      setError(t.featAsk.errMsg);
       return;
     }
     setError(null);
@@ -35,21 +37,16 @@ export default function AskEdgar() {
 
   return (
     <div className="feat" id="feat-ask">
-      <p className="feat__eyebrow">Feature 03 · Ask Edgar</p>
-      <h3 className="feat__title">Ask Edgar</h3>
-      <p className="feat__intro">
-        Have a question, suggestion, or message? Your message is collected for
-        review and response. General questions that help the whole community
-        may be published without your personal details.
-      </p>
+      <p className="feat__eyebrow">{t.featAsk.eyebrow}</p>
+      <h3 className="feat__title">{t.featAsk.title}</h3>
+      <p className="feat__intro">{t.featAsk.intro}</p>
 
       <div className="feat__body">
         {result ? (
           <div className="feat__card">
             <div className="form-success" role="status">
-              Salamat. Your message has been received
-              {result.ref ? ` (reference ${result.ref})` : ""} and will be
-              reviewed and responded to.
+              {t.featAsk.successLead}
+              {result.ref ? ` (reference ${result.ref})` : ""} {t.featAsk.successTail}
             </div>
           </div>
         ) : (
@@ -57,7 +54,7 @@ export default function AskEdgar() {
             <div className="feat__columns">
               <div className="form-field">
                 <label className="form-label" htmlFor="ask-name">
-                  Name
+                  {t.featAsk.nameLabel}
                 </label>
                 <input
                   id="ask-name"
@@ -66,13 +63,13 @@ export default function AskEdgar() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
-                  placeholder="Your name"
+                  placeholder={t.featAsk.namePlaceholder}
                   aria-invalid={!!error && !name.trim()}
                 />
               </div>
               <div className="form-field">
                 <label className="form-label" htmlFor="ask-contact">
-                  Contact
+                  {t.featAsk.contactLabel}
                 </label>
                 <input
                   id="ask-contact"
@@ -80,7 +77,7 @@ export default function AskEdgar() {
                   type="text"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  placeholder="Phone or email"
+                  placeholder={t.featAsk.contactPlaceholder}
                   aria-invalid={!!error && !contact.trim()}
                 />
               </div>
@@ -88,7 +85,7 @@ export default function AskEdgar() {
 
             <div className="form-field">
               <label className="form-label" htmlFor="ask-message">
-                Question or message
+                {t.featAsk.msgLabel}
               </label>
               <textarea
                 id="ask-message"
@@ -96,7 +93,7 @@ export default function AskEdgar() {
                 rows={5}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Write your message"
+                placeholder={t.featAsk.msgPlaceholder}
                 aria-invalid={!!error && !message.trim()}
               />
             </div>
@@ -108,22 +105,19 @@ export default function AskEdgar() {
             )}
 
             <button className="btn-submit" type="submit" disabled={busy}>
-              {busy ? "Submitting…" : "Send message"}
+              {busy ? t.featAsk.submitting : t.featAsk.submit}
             </button>
 
             <p className="empty__meta" style={{ marginTop: "1rem" }}>
-              Messages are collected for review and response.
+              {t.featAsk.helper}
             </p>
           </form>
         )}
 
         <div className="empty">
-          <span className="empty__label">Public replies</span>
-          <p className="empty__text">
-            Responses to general community questions will be published here if
-            they are useful to everyone in Barangay Tabon.
-          </p>
-          <span className="empty__meta">Nothing published yet</span>
+          <span className="empty__label">{t.featAsk.emptyLabel}</span>
+          <p className="empty__text">{t.featAsk.emptyText}</p>
+          <span className="empty__meta">{t.featAsk.emptyMeta}</span>
         </div>
       </div>
     </div>

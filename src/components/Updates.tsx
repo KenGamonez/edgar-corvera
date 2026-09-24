@@ -1,4 +1,5 @@
 import Reveal from "../lib/reveal";
+import { useLang } from "../i18n/LanguageContext";
 import "./updates.css";
 
 const ITEMS: {
@@ -9,22 +10,21 @@ const ITEMS: {
 }[] = [];
 
 export default function Updates() {
+  const { t } = useLang();
   return (
     <section className="updates section" id="updates" aria-labelledby="updates-title">
       <div className="container">
         <div className="updates__head">
           <div>
             <p className="eyebrow" data-reveal>
-              Updates
+              {t.updates.eyebrow}
             </p>
             <h2 className="updates__title" id="updates-title" data-reveal>
-              Tabon Updates.
+              {t.updates.title}
             </h2>
           </div>
           <Reveal as="p" className="updates__note" delay={120}>
-            Community updates, announcements, meetings, and verified
-            developments will be published here — nothing that has not
-            actually happened.
+            {t.updates.note}
           </Reveal>
         </div>
 
@@ -50,18 +50,14 @@ export default function Updates() {
           </ul>
         ) : (
           <Reveal className="updates__empty" delay={80}>
-            <span className="updates__empty-label">Tabon Updates</span>
-            <p className="updates__empty-text">
-              No updates have been published yet.
-            </p>
-            <span className="updates__empty-meta">
-              Updates will appear here as they are published
-            </span>
+            <span className="updates__empty-label">{t.updates.emptyLabel}</span>
+            <p className="updates__empty-text">{t.updates.emptyText}</p>
+            <span className="updates__empty-meta">{t.updates.emptyMeta}</span>
           </Reveal>
         )}
 
         <Reveal as="p" className="updates__status" delay={100}>
-          Nothing is posted here that has not actually happened.
+          {t.updates.status}
         </Reveal>
       </div>
     </section>
