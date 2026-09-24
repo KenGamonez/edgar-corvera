@@ -1,9 +1,11 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { submitConcern } from "../../lib/api";
+import { useLang } from "../../i18n/LanguageContext";
 import "./features.css";
 
-const CATEGORIES = [
+/** Submitted values are invariant (API/admin data); labels translate. */
+const CATEGORY_VALUES = [
   "Roads & drainage",
   "Water",
   "Electricity",
@@ -19,8 +21,6 @@ const CATEGORIES = [
   "Other",
 ];
 
-const STAGES = ["Received", "Under review", "In progress", "Resolved"];
-
 export default function Concerns() {
   const [category, setCategory] = useState("");
   const [area, setArea] = useState("");
@@ -31,6 +31,7 @@ export default function Concerns() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [result, setResult] = useState<{ ref: string } | null>(null);
+  const { t } = useLang();
 
   function onFile(e: ChangeEvent<HTMLInputElement>) {
     const f = e.target.files?.[0];
@@ -40,11 +41,11 @@ export default function Concerns() {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!category) {
-      setError("Please choose a category for the concern.");
+      setError(t.featConcerns.errCat);
       return;
     }
     if (!description.trim()) {
-      setError("Please describe the concern briefly.");
+      setError(t.featConcerns.errDesc);
       return;
     }
     setError(null);
@@ -65,17 +66,13 @@ export default function Concerns() {
 
   return (
     <div className="feat" id="feat-concerns">
-      <p className="feat__eyebrow">Feature 02 · Community concerns</p>
-      <h3 className="feat__title">Tell us a concern</h3>
-      <p className="feat__intro">
-        Share a concern so it can be documented, understood, and followed up.
-        A concern is logged with a reference number and moves through the
-        stages below as it is reviewed and acted on.
-      </p>
+      <p className="feat__eyebrow">{t.featConcerns.eyebrow}</p>
+      <h3 className="feat__title">{t.featConcerns.title}</h3>
+      <p className="feat__intro">{t.featConcerns.intro}</p>
 
       <div className="feat__body">
-        <div className="flow" aria-label="Concern review stages">
-          {STAGES.map((stage, i) => (
+        <div className="flow" aria-label={t.featConcerns.stagesLabel}>
+          {t.concernStages.map((stage, i) => (
             <div className="flow__step" key={stage}>
               <span className="flow__step-n">0{i + 1}</span>
               <span className="flow__step-t">{stage}</span>
@@ -86,9 +83,9 @@ export default function Concerns() {
         {result ? (
           <div className="feat__card">
             <div className="form-success" role="status">
-              Salamat. Your concern has been received
-              {result.ref ? ` (reference ${result.ref})` : ""}. It will be
-              reviewed and followed up.
+              {t.featConcerns.successLead}
+              {result.ref ? ` (reference ${result.ref})` : ""}.{" "}
+              {t.featConcerns.successTail}
             </div>
           </div>
         ) : (
@@ -97,7 +94,7 @@ export default function Concerns() {
               <div>
                 <div className="form-field">
                   <label className="form-label" htmlFor="concern-category">
-                    Category
+                    {t.featConcerns.catLabel}
                   </label>
                   <select
                     id="concern-category"
@@ -106,10 +103,10 @@ export default function Concerns() {
                     onChange={(e) => setCategory(e.target.value)}
                     aria-invalid={!!error && !category}
                   >
-                    <option value="">Select a category</option>
-                    {CATEGORIES.map((c) => (
+                    <option value="">{t.featConcerns.catDefault}</option>
+                    {CATEGORY_VALUES.map((c, i) => (
                       <option key={c} value={c}>
-                        {c}
+                        {t.concernCategories[i]}
                       </option>
                     ))}
                   </select>
@@ -117,7 +114,7 @@ export default function Concerns() {
 
                 <div className="form-field">
                   <label className="form-label" htmlFor="concern-area">
-                    Location / area <em>(purok, sitio, street, landmark)</em>
+                    {t.featConcerns.areaLabel} <em>{t.featConcerns.areaHint}</em>
                   </label>
                   <input
                     id="concern-area"
@@ -125,7 +122,7 @@ export default function Concerns() {
                     type="text"
                     value={area}
                     onChange={(e) => setArea(e.target.value)}
-                    placeholder="e.g. purok 3, near the covered court"
+                    placeholder={t.featConcerns.areaPlaceholder}
                   />
                 </div>
               </div>
@@ -133,7 +130,7 @@ export default function Concerns() {
               <div>
                 <div className="form-field">
                   <label className="form-label" htmlFor="concern-desc">
-                    Description
+                    {t.featConcerns.descLabel}
                   </label>
                   <textarea
                     id="concern-desc"
@@ -141,14 +138,14 @@ export default function Concerns() {
                     rows={4}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Describe the concern concretely"
+                    placeholder={t.featConcerns.descPlaceholder}
                     aria-invalid={!!error && !description.trim()}
                   />
                 </div>
 
                 <div className="form-field">
                   <label className="form-label" htmlFor="concern-photo">
-                    Photo <em>(optional)</em>
+                    {t.featConcerns.photoLabel} <em>{t.featConcerns.optional}</em>
                   </label>
                   <input
                     id="concern-photo"
@@ -159,7 +156,8 @@ export default function Concerns() {
                   />
                   {file && (
                     <span className="form-label">
-                      {file.name} · {(file.size / 1024).toFixed(0)} kB selected
+                      {file.name} · {(file.size / 1024).toFixed(0)} kB{" "}
+                      {t.featConcerns.fileSelected}
                     </span>
                   )}
                 </div>
@@ -169,7 +167,7 @@ export default function Concerns() {
             <div className="feat__columns">
               <div className="form-field">
                 <label className="form-label" htmlFor="concern-name">
-                  Name <em>(optional)</em>
+                  {t.featConcerns.nameLabel} <em>{t.featConcerns.optional}</em>
                 </label>
                 <input
                   id="concern-name"
@@ -178,12 +176,12 @@ export default function Concerns() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   autoComplete="name"
-                  placeholder="Your name"
+                  placeholder={t.featConcerns.namePlaceholder}
                 />
               </div>
               <div className="form-field">
                 <label className="form-label" htmlFor="concern-contact">
-                  Contact <em>(optional, for follow-up)</em>
+                  {t.featConcerns.contactLabel} <em>{t.featConcerns.contactHint}</em>
                 </label>
                 <input
                   id="concern-contact"
@@ -191,7 +189,7 @@ export default function Concerns() {
                   type="text"
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
-                  placeholder="Phone or email"
+                  placeholder={t.featConcerns.contactPlaceholder}
                 />
               </div>
             </div>
@@ -203,18 +201,15 @@ export default function Concerns() {
             )}
 
             <button className="btn-submit" type="submit" disabled={busy}>
-              {busy ? "Submitting…" : "Submit concern"}
+              {busy ? t.featConcerns.submitting : t.featConcerns.submit}
             </button>
           </form>
         )}
 
         <div className="empty">
-          <span className="empty__label">Published concerns</span>
-          <p className="empty__text">
-            No concerns are published yet. Public updates about concerns will
-            appear here as they are received, reviewed, and followed up.
-          </p>
-          <span className="empty__meta">Nothing published yet</span>
+          <span className="empty__label">{t.featConcerns.emptyLabel}</span>
+          <p className="empty__text">{t.featConcerns.emptyText}</p>
+          <span className="empty__meta">{t.featConcerns.emptyMeta}</span>
         </div>
       </div>
     </div>

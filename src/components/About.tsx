@@ -1,46 +1,18 @@
 import Reveal from "../lib/reveal";
+import { useLang } from "../i18n/LanguageContext";
 import "./about.css";
 
-const CHAPTERS = [
-  {
-    n: "01",
-    title: "Education",
-    text: "Edgar Corvera is an Electrical Engineer. Verified educational background will be published here as it is confirmed.",
-    state: "To be published",
-  },
-  {
-    n: "02",
-    title: "Professional experience",
-    text: "Engineering and industry experience — verified positions and organizations will be listed here as they are confirmed.",
-    state: "To be published",
-  },
-  {
-    n: "03",
-    title: "Public service",
-    text: "His documented public-service experience will be explained here, with dates and detail.",
-    state: "To be published",
-  },
-  {
-    n: "04",
-    title: "Committee & responsibility",
-    text: "Relevant committee and responsibility areas will be listed here as they are verified.",
-    state: "To be published",
-  },
-  {
-    n: "05",
-    title: "Recognitions",
-    text: "Documented awards and recognitions will be shown here, together with their sources.",
-    state: "To be published",
-  },
-];
+const CHAPTER_NUMS = ["01", "02", "03", "04", "05"] as const;
+const PRINCIPLE_NUMS = ["01", "02", "03"] as const;
 
 export default function About() {
+  const { t } = useLang();
   return (
     <section className="about section" id="about" aria-labelledby="about-title">
       <div className="container">
         <div className="about__head">
           <p className="eyebrow" data-reveal>
-            About Edgar
+            {t.about.eyebrow}
           </p>
           <h2 className="about__title" id="about-title" data-reveal>
             Edgar Corvera,
@@ -51,7 +23,7 @@ export default function About() {
 
         <div className="about__grid">
           <Reveal variant="left" className="about__figure" delay={60}>
-            <div className="about__frame" role="img" aria-label="Edgar Corvera — photograph">
+            <div className="about__frame" role="img" aria-label={t.about.photoLabel}>
               <img
                 className="about__logo"
                 src="/images/about.png"
@@ -69,63 +41,44 @@ export default function About() {
 
           <div className="about__content">
             <Reveal as="p" className="about__lead" delay={40}>
-              Experience built through engineering,
+              {t.about.leadLine1}
               <br />
-              industry, and public service.
+              {t.about.leadLine2}
             </Reveal>
 
             <Reveal as="p" className="about__text" delay={110}>
-              Edgar Corvera is an Electrical Engineer from Barangay Tabon,
-              Bislig City, Surigao del Sur. His approach to public service is
-              shaped by the discipline of engineering — measure a problem
-              carefully, plan the work, do it properly, and account for the
-              result.
+              {t.about.text1}
             </Reveal>
 
             <Reveal as="p" className="about__text" delay={160}>
-              This section records who Edgar is and the experience he brings
-              into serving his community. Education, professional experience,
-              public service, committee work, and recognitions are each listed
-              here — and only what is confirmed is shown.
+              {t.about.text2}
             </Reveal>
 
             <Reveal className="about__chapters" delay={220}>
-              {CHAPTERS.map((c) => (
-                <div className="about__chapter" key={c.n}>
-                  <span className="about__chapter-n">{c.n}</span>
+              {t.aboutChapters.map((c, i) => (
+                <div className="about__chapter" key={CHAPTER_NUMS[i]}>
+                  <span className="about__chapter-n">{CHAPTER_NUMS[i]}</span>
                   <div className="about__chapter-body">
                     <h3 className="about__chapter-title">{c.title}</h3>
                     <p className="about__chapter-text">{c.text}</p>
                   </div>
-                  <span className="about__chapter-state">{c.state}</span>
+                  <span className="about__chapter-state">{t.about.toBePublished}</span>
                 </div>
               ))}
             </Reveal>
 
             <Reveal className="about__principles" delay={280}>
-              <h3 className="about__principles-title">Working principles</h3>
+              <h3 className="about__principles-title">{t.about.principlesTitle}</h3>
               <ol className="about__principles-list">
-                <li>
-                  <span className="about__principles-num">01</span>
-                  <div>
-                    <strong>Honesty before optics</strong>
-                    <p>Clear communication and disciplined public accounting.</p>
-                  </div>
-                </li>
-                <li>
-                  <span className="about__principles-num">02</span>
-                  <div>
-                    <strong>People before privilege</strong>
-                    <p>Every decision weighed against the interest of ordinary citizens.</p>
-                  </div>
-                </li>
-                <li>
-                  <span className="about__principles-num">03</span>
-                  <div>
-                    <strong>Work before words</strong>
-                    <p>Progress measured by accomplishment, not by announcement.</p>
-                  </div>
-                </li>
+                {t.aboutPrinciples.map((p, i) => (
+                  <li key={PRINCIPLE_NUMS[i]}>
+                    <span className="about__principles-num">{PRINCIPLE_NUMS[i]}</span>
+                    <div>
+                      <strong>{p.title}</strong>
+                      <p>{p.text}</p>
+                    </div>
+                  </li>
+                ))}
               </ol>
             </Reveal>
           </div>

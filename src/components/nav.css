@@ -294,3 +294,59 @@
     background: rgba(255, 255, 255, 0.96);
   }
 }
+
+/* ---- Skip link (revealed on keyboard focus only) ---- */
+.nav__skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 10;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-s);
+  transition: top 0.2s var(--ease-out);
+}
+
+.nav__skip:focus-visible {
+  top: 0.6rem;
+}
+
+/* ---- Language toggle (EN | BI) ---- */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--stone);
+  border-radius: var(--radius-s);
+  overflow: hidden;
+  flex: 0 0 auto;
+}
+
+.lang-toggle__btn {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0.45rem 0.6rem;
+  transition:
+    background 0.25s var(--ease-out),
+    color 0.25s var(--ease-out);
+}
+
+.lang-toggle__btn + .lang-toggle__btn {
+  border-left: 1px solid var(--stone);
+}
+
+.lang-toggle__btn:hover {
+  color: var(--ink-2);
+}
+
+.lang-toggle__btn.is-active {
+  background: var(--ink);
+  color: var(--ivory);
+}

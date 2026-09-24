@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import type { CSSProperties } from "react";
+import { useLang } from "../i18n/LanguageContext";
 import "./hero.css";
 
 export default function Hero() {
+  const { t } = useLang();
   useEffect(() => {
     if (!window.matchMedia("(pointer: fine)").matches) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -26,9 +28,7 @@ export default function Hero() {
       <div className="container hero__inner">
         <div className="hero__meta">
           <p className="hero__mono">Bislig City · Surigao del Sur</p>
-          <p className="hero__mono hero__mono--right">
-            Public service, in the open
-          </p>
+          <p className="hero__mono hero__mono--right">{t.hero.tagline}</p>
         </div>
 
         <div className="hero__grid">
@@ -41,20 +41,18 @@ export default function Hero() {
               data-reveal="up"
               style={{ "--reveal-delay": "60ms" } as CSSProperties}
             >
-              Honest work,
+              {t.hero.titleLine1}
               <br />
-              for the people
+              {t.hero.titleLine2}
               <br />
-              <span className="hero__title-accent">of Tabon.</span>
+              <span className="hero__title-accent">{t.hero.titleLine3}</span>
             </h1>
             <p
               className="hero__lede"
               data-reveal="up"
               style={{ "--reveal-delay": "140ms" } as CSSProperties}
             >
-              Public service is measured not by position, but by the work, and
-              by the trust of the people who receive it. This site is offered
-              in that spirit — open, careful, and accountable.
+              {t.hero.lede}
             </p>
 
             <div
@@ -63,10 +61,10 @@ export default function Hero() {
               style={{ "--reveal-delay": "220ms" } as CSSProperties}
             >
               <a className="hero__btn hero__btn--solid" href="#public-service">
-                The record of service
+                {t.hero.ctaPrimary}
               </a>
               <a className="hero__btn hero__btn--ghost" href="#for-tabon">
-                For Tabon
+                {t.hero.ctaSecondary}
               </a>
             </div>
           </div>
@@ -92,14 +90,12 @@ export default function Hero() {
 
         <div className="hero__footer">
           <p className="hero__mono">Edgar Corvera · Electrical Engineer</p>
-          <p className="hero__mono hero__mono--right">
-            For the people of Barangay Tabon
-          </p>
+          <p className="hero__mono hero__mono--right">{t.hero.footerTag}</p>
         </div>
       </div>
 
-      <a className="hero__scroll" href="#about" aria-label="Scroll to About">
-        <span className="hero__scroll-label">Scroll</span>
+      <a className="hero__scroll" href="#about" aria-label={t.hero.scrollAria}>
+        <span className="hero__scroll-label">{t.hero.scrollLabel}</span>
         <span className="hero__scroll-rule" />
       </a>
     </section>
