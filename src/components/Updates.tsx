@@ -1,23 +1,24 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { updates } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
 
 export function Updates() {
+  const { t } = useLang()
   return (
     <section id="updates" className="bg-blue text-white" aria-labelledby="updates-heading">
       <div className="section-pad">
         <div className="container-site section-y">
           <SectionHeading
-            title="Latest Updates"
-            eyebrow="Campaign Newsroom"
+            title={t.updatesSection.title}
+            eyebrow={t.updatesSection.eyebrow}
             tone="white"
-            description="Verified campaign activities and community updates as they are published."
-            rightLink={{ label: 'Media', href: '#media' }}
+            description={t.updatesSection.description}
+            rightLink={{ label: t.updatesSection.rightLinkLabel, href: '#media' }}
           />
 
           <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {updates.map((item) => (
-              <Reveal key={item.id} className="md:col-span-2 lg:col-span-1">
+            {t.updates.map((item, i) => (
+              <Reveal key={`update-${i}`} className="md:col-span-2 lg:col-span-1">
                 <article className="card-white group flex h-full flex-col text-charcoal">
                   <div className="relative flex aspect-[7/4] items-center justify-center overflow-hidden bg-linear-to-br from-blue to-navy">
                     <span

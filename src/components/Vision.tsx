@@ -1,9 +1,12 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
 import { Sun } from './Sun'
-import { visionAreas } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
+
+const VISION_NUMBERS = ['01', '02', '03', '04', '05', '06'] as const
 
 export function Vision() {
+  const { t } = useLang()
   return (
     <section id="for-tabon" className="relative overflow-hidden bg-white" aria-labelledby="vision-heading">
       {/* Decorative flag motif in the corner, like the reference's flag graphic. */}
@@ -18,22 +21,22 @@ export function Vision() {
       <div className="section-pad relative">
         <div className="container-site section-y">
           <SectionHeading
-            title="Agenda for Tabon"
-            eyebrow="Vision & Platform"
+            title={t.vision.title}
+            eyebrow={t.vision.eyebrow}
             center
-            description="Six priority areas that will guide the campaign and the work ahead for Barangay Tabon."
+            description={t.vision.description}
           />
 
           <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {visionAreas.map((area) => (
-              <Reveal key={area.number} delay={0.04}>
+            {t.visionAreas.map((area, i) => (
+              <Reveal key={VISION_NUMBERS[i]} delay={0.04}>
                 <article className="tile-blue group flex h-full flex-col items-start gap-1 p-7 text-left transition-transform duration-300 hover:-translate-y-1 sm:p-8">
                   <div className="flex w-full items-center justify-between">
                     <span aria-hidden="true" className="text-2xl text-gold">
                       ★
                     </span>
                     <span className="font-display text-4xl leading-none text-white/25">
-                      {area.number}
+                      {VISION_NUMBERS[i]}
                     </span>
                   </div>
                   <h3 className="mt-4 font-display text-2xl leading-tight tracking-wide text-white sm:text-3xl">

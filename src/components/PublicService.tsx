@@ -1,21 +1,22 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { timeline } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
 
 export function PublicService() {
+  const { t } = useLang()
   return (
     <section id="public-service" className="bg-paper" aria-labelledby="service-heading">
       <div className="section-pad">
         <div className="container-site section-y">
           <SectionHeading
-            title="Service with Purpose"
-            eyebrow="The Journey So Far"
-            description="From engineering discipline to project leadership, from industry to elective public service — a path of experience that leads to Barangay Tabon."
+            title={t.publicService.title}
+            eyebrow={t.publicService.eyebrow}
+            description={t.publicService.description}
           />
 
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-            {timeline.map((item, i) => (
-              <Reveal key={item.id} delay={0.05 * (i % 5)} className="h-full">
+            {t.timeline.map((item, i) => (
+              <Reveal key={`${item.title}-${i}`} delay={0.05 * (i % 5)} className="h-full">
                 <article className="card-white group flex h-full flex-col">
                   <div className="relative overflow-hidden bg-linear-to-br from-blue via-blue to-navy p-6">
                     <span

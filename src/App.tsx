@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useLang } from './i18n/LanguageContext'
 import { Navbar } from './components/Navbar'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
@@ -14,6 +15,7 @@ import { Footer } from './components/Footer'
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const { t } = useLang()
 
   return (
     <div className="min-h-screen bg-white font-sans text-charcoal">
@@ -21,7 +23,7 @@ export default function App() {
         href="#about"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:text-sm"
       >
-        Skip to content
+        {t.a11y.skipToContent}
       </a>
 
       <Navbar menuOpen={menuOpen} onToggleMenu={() => setMenuOpen((open) => !open)} />

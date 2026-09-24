@@ -1,20 +1,21 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { committees } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
 
 export function CommitteeExperience() {
+  const { t } = useLang()
   return (
     <section id="committees" className="bg-paper" aria-labelledby="committees-heading">
       <div className="section-pad">
         <div className="container-site section-y">
           <SectionHeading
-            title="Committee Experience"
-            eyebrow="Council Committees"
-            description="Areas of committee work where engineering discipline meets city governance."
+            title={t.committeesSection.title}
+            eyebrow={t.committeesSection.eyebrow}
+            description={t.committeesSection.description}
           />
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {committees.map((committee, i) => (
+            {t.committees.map((committee, i) => (
               <Reveal key={committee.title} delay={0.05}>
                 <article className="card-white group relative h-full overflow-hidden border-t-8 border-blue p-7 sm:p-9">
                   <span

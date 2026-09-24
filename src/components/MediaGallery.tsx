@@ -1,6 +1,6 @@
 import { Reveal } from './Reveal'
 import { Button } from './Button'
-import { mediaItems } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
 
 const aspectClass: Record<string, string> = {
   wide: 'aspect-[4/3]',
@@ -8,7 +8,10 @@ const aspectClass: Record<string, string> = {
   tall: 'aspect-[3/4]',
 }
 
+const MEDIA_ASPECTS = ['wide', 'tall', 'square', 'wide', 'square', 'tall'] as const
+
 export function MediaGallery() {
+  const { t } = useLang()
   return (
     <section id="media" className="bg-red text-white" aria-labelledby="media-heading">
       <div className="section-pad">
@@ -17,24 +20,23 @@ export function MediaGallery() {
             <Reveal>
               <p className="micro-label flex items-center gap-2 text-gold">
                 <span aria-hidden="true">★</span>
-                Featured
+                {t.media.eyebrow}
               </p>
               <h2
                 id="media-heading"
                 className="mt-4 font-display text-[clamp(3rem,9vw,6rem)] uppercase leading-[0.9] tracking-[0.01em]"
               >
-                In the<br />community.
+                {t.media.titleLine1}<br />{t.media.titleLine2}
               </h2>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-white/85 sm:text-lg text-pretty">
-                Barangay life, public service, and shared civic moments across Tabon and Bislig
-                City.
+                {t.media.description}
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Button href="#updates" variant="blue">
-                  Follow Updates
+                  {t.media.ctaPrimary}
                 </Button>
                 <Button href="#connect" variant="outline">
-                  Connect
+                  {t.media.ctaSecondary}
                 </Button>
               </div>
             </Reveal>
@@ -52,10 +54,10 @@ export function MediaGallery() {
                   ★
                 </span>
                 <p className="mt-6 font-display text-3xl uppercase leading-tight tracking-wide sm:text-4xl">
-                  The campaign for Barangay Tabon
+                  {t.media.crestTitle}
                 </p>
                 <p className="mt-4 micro-label text-white/70">
-                  Media compilation will be published here once verified
+                  {t.media.crestNote}
                 </p>
               </div>
             </Reveal>
@@ -65,14 +67,14 @@ export function MediaGallery() {
           <div className="mt-16">
             <p className="micro-label flex items-center gap-2 text-gold">
               <span aria-hidden="true">★</span>
-              Gallery
+              {t.media.galleryLabel}
             </p>
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {mediaItems.map((item) => (
-                <Reveal key={item.id} delay={0.03}>
+              {t.mediaItems.map((item, i) => (
+                <Reveal key={`m${i + 1}`} delay={0.03}>
                   <figure className="btn-shadow group relative overflow-hidden border-2 border-white/30 transition-colors duration-300 hover:border-gold">
                     <div
-                      className={`relative ${aspectClass[item.aspect] ?? 'aspect-[4/3]'} flex items-center justify-center bg-white/5 transition-colors duration-300 group-hover:bg-white/10`}
+                      className={`relative ${aspectClass[MEDIA_ASPECTS[i] ?? 'wide'] ?? 'aspect-[4/3]'} flex items-center justify-center bg-white/5 transition-colors duration-300 group-hover:bg-white/10`}
                     >
                       <span
                         aria-hidden="true"

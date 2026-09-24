@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { Button } from './Button'
 import { Logo } from './Logo'
 import { Sun } from './Sun'
-import { brand, about } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
 
 const ease = [0.22, 1, 0.36, 1] as const
 const SLIDE_MS = 6000
@@ -16,38 +16,42 @@ type Slide = {
   buttons: { href: string; label: string; variant: 'red' | 'gold' }[]
 }
 
-const slides: Slide[] = [
-  {
-    kicker: brand.title,
-    lines: ['Edgar', 'Corvera'],
-    accent: 'red',
-    body: about.intro,
-    buttons: [
-      { href: '#about', label: 'Meet Edgar', variant: 'red' },
-      { href: '#for-tabon', label: 'Vision for Tabon', variant: 'gold' },
-    ],
-  },
-  {
-    kicker: `${brand.locationShort} · ${brand.city}`,
-    lines: ['Engineering.', 'Public Service.', 'Experience.'],
-    accent: 'blue',
-    body: 'Bringing technical discipline and community focus home to Barangay Tabon.',
-    buttons: [
-      { href: '#public-service', label: 'Public Service', variant: 'red' },
-      { href: '#updates', label: 'Updates', variant: 'gold' },
-    ],
-  },
-]
-
 export function Hero() {
   const reduce = useReducedMotion()
   const [index, setIndex] = useState(0)
+  const { t } = useLang()
+
+  const slides: Slide[] = useMemo(
+    () => [
+      {
+        kicker: t.hero.slide0Kicker,
+        lines: ['Edgar', 'Corvera'],
+        accent: 'red',
+        body: t.hero.slide0Body,
+        buttons: [
+          { href: '#about', label: t.hero.slide0Cta1, variant: 'red' },
+          { href: '#for-tabon', label: t.hero.slide0Cta2, variant: 'gold' },
+        ],
+      },
+      {
+        kicker: t.hero.slide1Kicker,
+        lines: [t.hero.slide1TitleLine1, t.hero.slide1TitleLine2, t.hero.slide1TitleLine3],
+        accent: 'blue',
+        body: t.hero.slide1Body,
+        buttons: [
+          { href: '#public-service', label: t.hero.slide1Cta1, variant: 'red' },
+          { href: '#updates', label: t.hero.slide1Cta2, variant: 'gold' },
+        ],
+      },
+    ],
+    [t],
+  )
 
   useEffect(() => {
     if (reduce) return
     const timer = setInterval(() => setIndex((i) => (i + 1) % slides.length), SLIDE_MS)
     return () => clearInterval(timer)
-  }, [index, reduce])
+  }, [reduce, slides.length])
 
   const slide = slides[index]
 
@@ -151,13 +155,13 @@ export function Hero() {
                     aria-hidden="true"
                     className="absolute left-0 top-0 h-1.5 w-full bg-gold"
                   />
-                  <Logo size="hero" alt="Edgar Corvera campaign logo" className="w-full" />
-                  <p className="micro-label mt-5 flex items-center justify-center gap-2 text-center text-charcoal/60">
-                    <span aria-hidden="true" className="text-red">
-                      ★
-                    </span>
-                    {brand.election}
-                  </p>
+                    <Logo size="hero" alt="Edgar Corvera campaign logo" className="w-full" />
+                    <p className="micro-label mt-5 flex items-center justify-center gap-2 text-center text-charcoal/60">
+                      <span aria-hidden="true" className="text-red">
+                        ★
+                      </span>
+                      {t.brand.election}
+                    </p>
                 </div>
               </motion.div>
             </div>
@@ -169,7 +173,7 @@ export function Hero() {
           <button
             type="button"
             onClick={() => setIndex((index - 1 + slides.length) % slides.length)}
-            aria-label="Previous"
+            aria-label={t.a11y.previous}
             className="btn-shadow flex h-11 w-11 items-center justify-center bg-white font-display text-xl text-red transition-colors duration-300 hover:bg-red hover:text-white"
           >
             ‹
@@ -177,19 +181,19 @@ export function Hero() {
           <button
             type="button"
             onClick={() => setIndex((index + 1) % slides.length)}
-            aria-label="Next"
+            aria-label={t.a11y.next}
             className="btn-shadow flex h-11 w-11 items-center justify-center bg-white font-display text-xl text-red transition-colors duration-300 hover:bg-red hover:text-white"
           >
             ›
           </button>
-          <div className="ml-2 flex items-center gap-2" role="tablist" aria-label="Slides">
+          <div className="ml-2 flex items-center gap-2" role="tablist" aria-label={t.a11y.slidesRegion}>
             {slides.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 role="tab"
                 aria-selected={i === index}
-                aria-label={`Slide ${i + 1}`}
+                aria-label={`${t.a11y.slideLabelPrefix} ${i + 1}`}
                 onClick={() => setIndex(i)}
                 className={`h-2.5 w-2.5 rounded-full border border-navy/40 transition-colors duration-300 ${
                   i === index ? 'bg-red' : 'bg-transparent'

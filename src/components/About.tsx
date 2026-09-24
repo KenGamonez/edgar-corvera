@@ -1,21 +1,23 @@
 import { Reveal } from './Reveal'
 import { Button } from './Button'
-import { brand, about } from '../data/content'
-
-const facts = [
-  { label: 'Education', value: about.education },
-  { label: 'Profession', value: about.profession },
-  { label: 'Background', value: about.previousRole },
-  { label: 'Public Service', value: about.publicService },
-]
-
-const tiles = [
-  { href: '#public-service', label: 'Public Service', index: '01' },
-  { href: '#legislative', label: 'Legislative Record', index: '02' },
-  { href: '#for-tabon', label: 'For Tabon', index: '03' },
-]
+import { useLang } from '../i18n/LanguageContext'
 
 export function About() {
+  const { t } = useLang()
+
+  const facts = [
+    { label: t.about.factEducation, value: t.about.educationValue },
+    { label: t.about.factProfession, value: t.about.professionValue },
+    { label: t.about.factBackground, value: t.about.backgroundValue },
+    { label: t.about.factPublicService, value: t.about.publicServiceValue },
+  ]
+
+  const tiles = [
+    { href: '#public-service', label: t.about.tile1, index: '01' },
+    { href: '#legislative', label: t.about.tile2, index: '02' },
+    { href: '#for-tabon', label: t.about.tile3, index: '03' },
+  ]
+
   return (
     <section id="about" className="bg-blue text-white" aria-labelledby="about-heading">
       <div className="section-pad">
@@ -24,24 +26,24 @@ export function About() {
             <Reveal>
               <p className="micro-label flex items-center gap-2 text-gold">
                 <span aria-hidden="true">★</span>
-                {brand.election}
+                {t.about.kicker}
               </p>
               <h2
                 id="about-heading"
                 className="mt-4 font-display text-[clamp(3.2rem,9vw,7rem)] uppercase leading-[0.9] tracking-[0.01em] text-white"
               >
-                Barangay
+                {t.about.titleLine1}
                 <br />
-                Captain
+                {t.about.titleLine2}
               </h2>
               <p className="mt-6 text-base text-gold/90 sm:text-lg">
-                {brand.fullName} · {brand.location}
+                {t.brand.fullName} · {t.about.tagline}
               </p>
             </Reveal>
 
             <Reveal delay={0.08}>
               <p className="text-base leading-[1.7] text-white/90 sm:text-lg text-pretty">
-                {about.intro}
+                {t.about.intro}
               </p>
 
               <ul className="mt-8 space-y-4">
@@ -55,10 +57,10 @@ export function About() {
 
               <div className="mt-9 flex flex-wrap gap-3">
                 <Button href="#public-service" variant="red">
-                  Read More
+                  {t.about.ctaPrimary}
                 </Button>
                 <Button href="#for-tabon" variant="gold">
-                  Vision for Tabon
+                  {t.about.ctaSecondary}
                 </Button>
               </div>
             </Reveal>

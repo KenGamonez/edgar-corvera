@@ -1,8 +1,11 @@
 import { Logo } from './Logo'
-import { brand, navLinks } from '../data/content'
+import { getNavLinks } from '../i18n/dict'
+import { useLang } from '../i18n/LanguageContext'
 
 export function Footer() {
   const year = new Date().getFullYear()
+  const { t } = useLang()
+  const navLinks = getNavLinks(t)
 
   return (
     <footer className="bg-navy text-white" aria-labelledby="footer-heading">
@@ -12,7 +15,7 @@ export function Footer() {
             <div className="lg:col-span-5">
               <a
                 href="#top"
-                aria-label="Edgar Corvera — back to top"
+                aria-label={t.a11y.backToTop}
                 className="inline-block border-4 border-gold bg-white p-3 sm:p-4"
               >
                 <Logo size="md" className="h-12 w-auto sm:h-14" />
@@ -25,9 +28,9 @@ export function Footer() {
                 <br />
                 Corvera
               </h2>
-              <p className="mt-3 text-gold">{brand.title}</p>
-              <p className="mt-1 text-white/60">{brand.location}</p>
-              <p className="mt-1 text-white/40">{brand.province}</p>
+              <p className="mt-3 text-gold">{t.brand.title}</p>
+              <p className="mt-1 text-white/60">{t.brand.location}</p>
+              <p className="mt-1 text-white/40">{t.brand.province}</p>
             </div>
 
             <div className="flex flex-col justify-between gap-10 lg:col-span-7 lg:items-end lg:text-right">
@@ -53,7 +56,7 @@ export function Footer() {
               </nav>
 
               <div className="w-full lg:max-w-md">
-                <h3 className="font-display text-xl uppercase tracking-wide text-gold">Pages</h3>
+                <h3 className="font-display text-xl uppercase tracking-wide text-gold">{t.footer.pagesHeading}</h3>
                 <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-2 border-t border-white/15 pt-4 text-left lg:text-right">
                   {navLinks.map((link) => (
                     <a
@@ -70,9 +73,9 @@ export function Footer() {
           </div>
 
           <div className="flex flex-col gap-2 border-t border-white/15 py-6 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs text-white/40">© {year} Edgar Corvera Campaign</p>
+            <p className="text-xs text-white/40">© {year} {t.footer.copyrightSuffix}</p>
             <p className="text-xs text-white/30">
-              Election and legislative figures subject to verification.
+              {t.footer.disclaimer}
             </p>
           </div>
         </div>

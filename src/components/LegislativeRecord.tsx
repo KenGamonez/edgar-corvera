@@ -1,35 +1,42 @@
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
-import { legislativeRecords, disclaimers } from '../data/content'
+import { useLang } from '../i18n/LanguageContext'
+
+const RECORD_META = [
+  { number: '01', reference: 'Ordinance No. 2017-05', year: '2017' },
+  { number: '02', reference: null as string | null, year: '2023' },
+  { number: '03', reference: null as string | null, year: '2023' },
+  { number: '04', reference: null as string | null, year: '2022–2025' },
+] as const
 
 export function LegislativeRecord() {
+  const { t } = useLang()
   return (
     <section id="legislative" className="bg-white" aria-labelledby="legislative-heading">
       <div className="section-pad">
         <div className="container-site section-y">
           <SectionHeading
-            title="Legislative Record"
-            eyebrow="Ordinances & Measures"
-            description="Selected measures sponsored and authored during service on the Bislig City Council."
-            rightLink={{ label: 'Read More', href: '#public-service' }}
+            title={t.legislative.title}
+            eyebrow={t.legislative.eyebrow}
+            description={t.legislative.description}
           />
 
           <div className="mt-12 grid gap-6 md:grid-cols-2">
-            {legislativeRecords.map((record) => (
-              <Reveal key={record.number} delay={0.05}>
+            {t.legislativeRecords.map((record, i) => (
+              <Reveal key={RECORD_META[i].number} delay={0.05}>
                 <article className="card-white group flex h-full flex-col border-t-4 border-red">
                   <div className="flex items-center justify-between gap-4 p-6 pb-4">
                     <span className="flex h-14 w-14 shrink-0 items-center justify-center bg-red font-display text-2xl text-white">
-                      {record.number}
+                      {RECORD_META[i].number}
                     </span>
                     <div className="text-right">
-                      {record.reference ? (
-                        <p className="micro-label text-blue">{record.reference}</p>
+                      {RECORD_META[i].reference ? (
+                        <p className="micro-label text-blue">{RECORD_META[i].reference}</p>
                       ) : (
-                        <p className="micro-label text-charcoal/40">City Ordinance</p>
+                        <p className="micro-label text-charcoal/40">{t.legislative.cityOrdinanceFallback}</p>
                       )}
                       <p className="mt-1 font-display text-sm uppercase tracking-widest text-charcoal/60">
-                        {record.year}
+                        {RECORD_META[i].year}
                       </p>
                     </div>
                   </div>
@@ -47,7 +54,7 @@ export function LegislativeRecord() {
             ))}
           </div>
 
-          <p className="mt-8 max-w-xl text-sm text-charcoal/50">{disclaimers.legislative}</p>
+          <p className="mt-8 max-w-xl text-sm text-charcoal/50">{t.legislative.disclaimer}</p>
         </div>
       </div>
     </section>
